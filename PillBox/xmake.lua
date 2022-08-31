@@ -1,3 +1,6 @@
+set_policy("build.warning", true) -- show warnings
+set_warnings("all") -- warn about many things
+
 add_rules("mode.debug", "mode.release")
 add_requires("glfw")
 
