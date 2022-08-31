@@ -8,7 +8,7 @@ using namespace Pillbox;
 
 int window_width = 1280;
 int window_height = 720;
-string window_name = "Pillbox";
+const char* window_name = "Pillbox";
 bool window_fullscreen = 0; 
 
 void GraphicsManager::StartUp()
