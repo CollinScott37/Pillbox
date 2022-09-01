@@ -34,3 +34,8 @@ void GraphicsManager::ShutDown()
 {
     glfwTerminate();
 }
+
+void GraphicsManager::Draw()
+{
+
+}

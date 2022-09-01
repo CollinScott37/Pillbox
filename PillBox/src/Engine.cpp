@@ -30,7 +30,7 @@ void Engine::RunGameLoop()
 	{
 		auto t1 = std::chrono::steady_clock::now(); //start of tick
 		graphics.Draw();
-
+		
 		auto t2 = std::chrono::steady_clock::now(); //end of tick
 	
 		auto time_took = t2 - t1;

@@ -9,5 +9,6 @@ namespace Pillbox
 		//GraphicsManager() = default; //constructor?
 		void StartUp();
 		void ShutDown();
+		void Draw();
 	};
 }

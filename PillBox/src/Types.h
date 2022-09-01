@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "GraphicsManager.h"
-#include "Engine.h"
 
 namespace Pillbox
 {

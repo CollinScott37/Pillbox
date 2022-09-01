@@ -1,6 +1,6 @@
 #pragma once
 #include "Types.h"
-
+#include "GraphicsManager.h"
 /*	
 	Stores all of the various managers
 	Starts them up
@@ -16,6 +16,7 @@ namespace Pillbox
 		
 		void StartUp();
 		void ShutDown();
+		void RunGameLoop();
 
 	private:
 		GraphicsManager graphics;
