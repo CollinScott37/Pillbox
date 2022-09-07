@@ -12,7 +12,11 @@ namespace Pillbox
 		void StartUp();
 		void ShutDown();
 		void Draw();
+		
 		GLFWwindow* GetWindow();
+		
+		int ShouldQuit();
+		void SetShouldQuit(bool);
 
 	private:
 		GLFWwindow* window;

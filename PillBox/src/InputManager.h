@@ -15,7 +15,7 @@ namespace Pillbox
 		void Update();
 		void ShutDown();
 		void SetWindow(GLFWwindow*);
-		//bool KeyIsPressed(int keyName);
+		int KeyIsPressed(int keyName);
 	private:
 		GLFWwindow* window;
 	};

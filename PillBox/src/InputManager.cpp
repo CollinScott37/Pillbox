@@ -10,13 +10,21 @@ void InputManager::StartUp()
 
 void InputManager::Update()
 {
-	//engine->Test();
-	//gflwPollEvents();
+	glfwPollEvents();
+	//std::cout << "press c: " << glfwGetKey(window, GLFW_KEY_C) << "\n";
+
+
 }
+
+
 
 void InputManager::ShutDown()
 {
 
+}
+int InputManager::KeyIsPressed(int keyName)
+{
+	return glfwGetKey(window, keyName);
 }
 
 void InputManager::SetWindow(GLFWwindow* w)

@@ -42,3 +42,15 @@ GLFWwindow* GraphicsManager::GetWindow()
 {
     return window;
 }
+
+int GraphicsManager::ShouldQuit()
+{
+    std::cout << "HERE1\n";
+    return glfwWindowShouldClose(window);
+}
+
+void GraphicsManager::SetShouldQuit(bool quit)
+{
+    std::cout << "HERE2\n";
+    glfwSetWindowShouldClose(window, quit);
+}
