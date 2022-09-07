@@ -5,17 +5,18 @@
 
 namespace Pillbox
 {
-	class GraphicsManager
+
+	//class Engine;
+	class InputManager
 	{
 	public:
-		friend class InputManager;
+		
 		void StartUp();
+		void Update();
 		void ShutDown();
-		void Draw();
-		GLFWwindow* GetWindow();
-
+		void SetWindow(GLFWwindow*);
+		//bool KeyIsPressed(int keyName);
 	private:
 		GLFWwindow* window;
-		//Engine& engine;
 	};
 }

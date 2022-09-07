@@ -5,30 +5,44 @@
 
 using namespace Pillbox;
 
-/*
 Engine::Engine()
 {
-	g = GraphicsManager();
+	
 }
-*/
+
+Engine::~Engine()
+{
+
+}
+
 void Engine::StartUp()
 {	
 	graphics.StartUp();
+	input.SetWindow(graphics.GetWindow());
+	input.StartUp();
 }
 
 void Engine::ShutDown()
 {
 	graphics.ShutDown();
+	input.ShutDown();
 }
 
-void Engine::RunGameLoop()
+//void Engine::RunGameLoop(const UpdateCallback& callback(char))
+void Engine::RunGameLoop(void (*callback)(char))
 {
-	graphics.StartUp();
+	StartUp();
 
 	const auto one_sixteith_of_a_second = std::chrono::duration<real>(1. / 60.);
+
 	while (true)
 	{
 		auto t1 = std::chrono::steady_clock::now(); //start of tick
+		
+		input.Update();
+
+		callback('a');
+
 		graphics.Draw();
 		
 		auto t2 = std::chrono::steady_clock::now(); //end of tick
@@ -38,5 +52,10 @@ void Engine::RunGameLoop()
 	}
 
 	ShutDown();
+}
+
+void Engine::Test()
+{
+	std::cout << "TEST\n";
 }
 
