@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 
+
 namespace Pillbox
 {
     typedef double real;
@@ -12,7 +13,11 @@ namespace Pillbox
     class EngineRef;
     class GraphicsManager;
     class InputManager;
+    class ResourceManager;
+    class SoundManager;
 
-    typedef std::function<void()> UpdateCallback;
+    typedef std::function<void ()> UpdateCallback;
+    
+    //std::function<"Return_Type"("Parameters");
 
 }

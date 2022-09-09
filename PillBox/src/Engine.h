@@ -4,6 +4,8 @@
 #include "Types.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
+#include "ResourceManager.h"
+#include "SoundManager.h"
 
 /*	
 	Stores all of the various managers
@@ -18,17 +20,22 @@ namespace Pillbox
 	class Engine
 	{
 	public:
-		Engine();
-		~Engine();
+		InputManager input;
+		GraphicsManager graphics;
+		ResourceManager resources;
+		SoundManager sounds;
+
+		//order in the way they are declared
+		Engine() : input(*this) , graphics(*this), resources(*this), sounds(*this){} //, graphics(*this) {}
+		//~Engine();
 		void StartUp();
 		void ShutDown();
 		//void RunGameLoop(const UpdateCallback& callback(char));
 		//void RunGameLoop(void (*callback)(char));
-		void RunGameLoop();
+		void RunGameLoop(const UpdateCallback& callback);
+		//void RunGameLoop();
 		void Test();
-	private:
-		GraphicsManager graphics;
-		InputManager input;
+
 	};
 
 

@@ -5,32 +5,39 @@
 
 using namespace Pillbox;
 
-Engine::Engine()
+/*
+Engine::Engine()	
 {
-	
+	input = InputManager(this);
 }
 
 Engine::~Engine()
 {
 
 }
+*/
 
 void Engine::StartUp()
 {	
 	graphics.StartUp();
 	input.SetWindow(graphics.GetWindow());
 	input.StartUp();
+	resources.StartUp();
+	sounds.StartUp();
 }
 
 void Engine::ShutDown()
 {
 	graphics.ShutDown();
 	input.ShutDown();
+	resources.ShutDown();
+	sounds.ShutDown();
 }
 
 //void Engine::RunGameLoop(const UpdateCallback& callback(char))
 //void Engine::RunGameLoop(void (*callback)(char))
-void Engine::RunGameLoop()
+void Engine::RunGameLoop(const UpdateCallback& callback)
+//void Engine::RunGameLoop()
 {
 	StartUp();
 
@@ -45,11 +52,16 @@ void Engine::RunGameLoop()
 		
 		input.Update();
 
-		//callback('a');
 		
 		graphics.Draw();
 		
-		isdone = graphics.ShouldQuit() || input.KeyIsPressed(GLFW_KEY_Q);
+		callback();
+
+		isdone = graphics.ShouldQuit() || input.KeyIsPressed(GLFW_KEY_ESCAPE);
+
+		
+
+
 
 		auto t2 = std::chrono::steady_clock::now(); //end of tick
 		auto time_took = t2 - t1;

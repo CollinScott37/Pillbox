@@ -3,20 +3,24 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
+
 namespace Pillbox
 {
 
-	//class Engine;
 	class InputManager
 	{
+		
 	public:
 		
+		Engine& engine;
+		InputManager(Engine& anEng) : engine(anEng) {}
 		void StartUp();
 		void Update();
 		void ShutDown();
 		void SetWindow(GLFWwindow*);
-		int KeyIsPressed(int keyName);
+		bool KeyIsPressed(int keyName);	
 	private:
 		GLFWwindow* window;
+		
 	};
 }

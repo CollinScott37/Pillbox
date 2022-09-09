@@ -8,6 +8,8 @@ namespace Pillbox
 	class GraphicsManager
 	{
 	public:
+		Engine& engine;
+		GraphicsManager(Engine& e) : engine(e) {}
 		friend class InputManager;
 		void StartUp();
 		void ShutDown();

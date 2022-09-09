@@ -1,5 +1,5 @@
 #include "GraphicsManager.h"
-
+#include "Engine.h"
 using namespace Pillbox;
 
 
@@ -45,7 +45,7 @@ GLFWwindow* GraphicsManager::GetWindow()
 
 int GraphicsManager::ShouldQuit()
 {
-    std::cout << "HERE1\n";
+    //std::cout << "HERE1\n";
     return glfwWindowShouldClose(window);
 }
 
