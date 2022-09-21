@@ -1,7 +1,21 @@
 #pragma once
 #include "Types.h"
+#include <unordered_map>
 #define GLFW_INCLUDE_NONE
-#include "GLFW/glfw3.h"
+//#include "GLFW/glfw3.h"
+
+
+
+namespace
+{
+	struct ImageData {
+		std::string name;
+		sg_image data;
+		int width;
+		int height;
+	};
+}
+
 
 namespace Pillbox
 {
@@ -14,14 +28,25 @@ namespace Pillbox
 		void StartUp();
 		void ShutDown();
 		void Draw();
-		
+		bool LoadImage( const string& name, const string& path );
 		GLFWwindow* GetWindow();
 		
 		int ShouldQuit();
 		void SetShouldQuit(bool);
 
 	private:
+		
+		int window_width = 1280;
+		int window_height = 720;
+		const char* window_name = "Pillbox";
+		bool window_fullscreen = 0;
+		
+		sg_pass_action pass_action{};
+		sg_pipeline pipeline{};
+		sg_bindings bindings{};	
 		GLFWwindow* window;
-		//Engine& engine;
+		typedef std::unordered_map< string, ImageData > ImageMap;
+		ImageMap imageMap;
+
 	};
 }

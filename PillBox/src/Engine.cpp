@@ -20,7 +20,6 @@ Engine::~Engine()
 void Engine::StartUp()
 {	
 	graphics.StartUp();
-	input.SetWindow(graphics.GetWindow());
 	input.StartUp();
 	resources.StartUp();
 	sounds.StartUp();
@@ -34,13 +33,10 @@ void Engine::ShutDown()
 	sounds.ShutDown();
 }
 
-//void Engine::RunGameLoop(const UpdateCallback& callback(char))
-//void Engine::RunGameLoop(void (*callback)(char))
-void Engine::RunGameLoop(const UpdateCallback& callback)
-//void Engine::RunGameLoop()
-{
-	StartUp();
 
+void Engine::RunGameLoop(const UpdateCallback& callback)
+{
+	
 	const auto one_sixteith_of_a_second = std::chrono::duration<real>(1. / 60.);
 	
 	bool isdone = graphics.ShouldQuit();
@@ -52,12 +48,11 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
 		
 		input.Update();
 
-		
 		graphics.Draw();
 		
 		callback();
 
-		isdone = graphics.ShouldQuit() || input.KeyIsPressed(GLFW_KEY_ESCAPE);
+		isdone = graphics.ShouldQuit() || input.GetKeyCodeDown(GLFW_KEY_ESCAPE);
 
 		
 

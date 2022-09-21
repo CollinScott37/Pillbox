@@ -2,7 +2,7 @@
 #include "Types.h"
 #include "soloud.h"
 #include "soloud_wav.h"
-#include "GLFW/glfw3.h"
+//#include "GLFW/glfw3.h"
 
 
 namespace Pillbox
@@ -14,12 +14,12 @@ namespace Pillbox
 		SoundManager(Engine& anEng) : engine(anEng) {}
 		void StartUp();
 		void ShutDown();
-		void PlaySoundKeyboard(int);
+		void PlaySound(string);
+		bool LoadSound( const string& name, const string& path );
 	private:
+		
 		SoLoud::Soloud soloud;
-		SoLoud::Wav quack;
-		SoLoud::Wav nuke;
-		SoLoud::Wav ph;
-		SoLoud::Wav death;
+		std::unordered_map< string, SoLoud::Wav > sounds;
+
 	};
 }

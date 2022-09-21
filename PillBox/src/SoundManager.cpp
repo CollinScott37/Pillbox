@@ -7,29 +7,34 @@ void SoundManager::StartUp()
 {
 	soloud.init();
 
-	quack.load( engine.resources.getPath("sounds/quack.wav").c_str());
-	nuke.load(engine.resources.getPath("sounds/nuke.wav").c_str());
-	ph.load(engine.resources.getPath("sounds/ph.wav").c_str());
-	death.load(engine.resources.getPath("sounds/death.wav").c_str());
+	//quack.load(engine.resources.getPath("sounds/quack.wav").c_str());
+	//nuke.load(engine.resources.getPath("sounds/nuke.wav").c_str());
+	//ph.load(engine.resources.getPath("sounds/ph.wav").c_str());
+	//death.load(engine.resources.getPath("sounds/death.wav").c_str());
 }
 
-void SoundManager::PlaySoundKeyboard(int keycode)
+void SoundManager::PlaySound(string name)
 {
-	if (keycode == GLFW_KEY_Q)
+	if (sounds.count(name) != 0)
 	{
-		soloud.play(quack);
+		soloud.play(sounds[name]);
 	}
-	else if (keycode == GLFW_KEY_N)
+	
+	
+}
+
+bool SoundManager::LoadSound( const string& name, const string& path )
+{
+	string p = path + "/" + name;
+
+	if (sounds.count(name) == 0)
 	{
-		soloud.play(nuke);
+		sounds[name].load(engine.resources.getPath(p).c_str());
+		return true;
 	}
-	else if (keycode == GLFW_KEY_P)
+	else
 	{
-		soloud.play(ph);
-	}
-	else if (keycode == GLFW_KEY_R)
-	{
-		soloud.play(death);
+		return false;
 	}
 	
 }

@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "GLFW/glfw3.h"
+//#include "GLFW/glfw3.h"
 #include "Types.h"
 #include "GraphicsManager.h"
 #include "InputManager.h"
@@ -30,10 +30,7 @@ namespace Pillbox
 		//~Engine();
 		void StartUp();
 		void ShutDown();
-		//void RunGameLoop(const UpdateCallback& callback(char));
-		//void RunGameLoop(void (*callback)(char));
 		void RunGameLoop(const UpdateCallback& callback);
-		//void RunGameLoop();
 		void Test();
 
 	};
