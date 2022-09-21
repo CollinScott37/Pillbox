@@ -1,14 +1,17 @@
 #include "GraphicsManager.h"
 #include "Engine.h"
 
+//#define GLFW_INCLUDE_NONE
 
+#define SOKOL_IMPL
+#define SOKOL_GLCORE33
+#include "sokol_gfx.h"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 using namespace Pillbox;
 using namespace glm;
-
-
-
-
 
 namespace {
     struct Uniforms {
@@ -114,7 +117,7 @@ void GraphicsManager::StartUp()
 
 
 }
-bool GraphicsManager::LoadImage( const string& name, const string& path )
+bool GraphicsManager::LoadSprite( const string& name, const string& path )
 {
     int width, height, channels;
 
@@ -171,16 +174,34 @@ void GraphicsManager::Draw()
         uniforms.projection[0][0] /= window_width;
     }
     
+    for(auto image : imageMap)
+    {
+        int image_width = image.second.width;
+        int image_height = image.second.height;
+        vec2 position(0, 0); //placeholder
+        real z = 0; //placeholder
+        vec2 scale(1, 1); //placeholder
 
+        uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * scale(mat4{ 1 }, vec3(scale));
+
+        if (image_width < image_height) {
+            uniforms.transform = uniforms.transform * scale(mat4{ 1 }, vec3(real(image_width) / image_height, 1.0, 1.0));
+        }
+        else {
+            uniforms.transform = uniforms.transform * scale(mat4{ 1 }, vec3(1.0, real(image_height) / image_width, 1.0));
+        }
+
+        sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
+
+        bindings.fs_images[0] = image.second.data;
+        sg_apply_bindings(bindings);
+        sg_draw(0, 4, 1);
+    }
+    sg_end_pass();
+    sg_commit();
+    glfwSwapBuffers(window);
     /*
-    uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * scale(mat4{ 1 }, vec3(scale));
 
-    if (image_width < image_height) {
-        uniforms.transform = uniforms.transform * scale(mat4{ 1 }, vec3(real(image_width) / image_height, 1.0, 1.0));
-    }
-    else {
-        uniforms.transform = uniforms.transform * scale(mat4{ 1 }, vec3(1.0, real(image_height) / image_width, 1.0));
-    }
     */
 }
 

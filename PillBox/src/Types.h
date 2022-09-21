@@ -4,17 +4,18 @@
 #include <functional>
 #include <unordered_map>
 
+#define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-#define SOKOL_IMPL
+//#define SOKOL_IMPL
 #define SOKOL_GLCORE33
 #include "sokol_gfx.h"
 
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
 namespace
 {

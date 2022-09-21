@@ -1,10 +1,6 @@
 #pragma once
 #include "Types.h"
 #include <unordered_map>
-#define GLFW_INCLUDE_NONE
-//#include "GLFW/glfw3.h"
-
-
 
 namespace
 {
@@ -28,7 +24,7 @@ namespace Pillbox
 		void StartUp();
 		void ShutDown();
 		void Draw();
-		bool LoadImage( const string& name, const string& path );
+		bool LoadSprite( const string& name, const string& path );
 		GLFWwindow* GetWindow();
 		
 		int ShouldQuit();
