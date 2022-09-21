@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "../src/Types.h"
-#include "../src/Engine.h"
+#include "Types.h"
+#include "Engine.h"
 
 using namespace Pillbox;
 
@@ -11,7 +11,7 @@ int main(int argc, const char* argv[]) {
     std::cout << "Takes a min to load\n";
     Engine e;
     e.StartUp();
-    //e.sounds.LoadSound("quack.wav", "sounds");
+    e.sounds.LoadSound("quack.wav", "sounds");
     //bool prevInputq = e.input.KeyIsPressed(GLFW_KEY_Q);
     //bool prevInputn = e.input.KeyIsPressed(GLFW_KEY_N);
     //bool prevInputp = e.input.KeyIsPressed(GLFW_KEY_P);
@@ -23,7 +23,7 @@ int main(int argc, const char* argv[]) {
         if (e.input.GetKeyCodeUp(GLFW_KEY_Q) == true)
         {
             std::cout << "Quack!\n";
-            //e.sounds.PlaySound("quack.wav");
+            e.sounds.PlaySound("quack.wav");
         }
 
 
