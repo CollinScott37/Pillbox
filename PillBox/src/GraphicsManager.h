@@ -1,7 +1,7 @@
 #pragma once
 #include "Types.h"
 #include <unordered_map>
-
+#include <vector>
 namespace
 {
 	struct ImageData {
@@ -24,14 +24,16 @@ namespace Pillbox
 		void StartUp();
 		void ShutDown();
 		void Draw();
-		bool LoadSprite( const string& name, const string& path );
+		bool LoadImageFile( const string& name, const string& path );
+		void LoadSprite(const string&, vec2, vec3, real);
+		//void LoadSprite(Sprite sprite);
 		GLFWwindow* GetWindow();
 		
 		int ShouldQuit();
 		void SetShouldQuit(bool);
 
 	private:
-		
+		std::vector<Sprite> sprites;
 		int window_width = 1280;
 		int window_height = 720;
 		const char* window_name = "Pillbox";

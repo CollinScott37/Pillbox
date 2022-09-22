@@ -22,7 +22,7 @@ namespace
     struct Sprite {
         std::string name;
         glm::vec2 position;
-        glm::vec2 scale;
+        glm::vec3 scale;
         double z;
     };
 }
