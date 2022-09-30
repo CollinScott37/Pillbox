@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "ECS.h"
 
 /*	
 	Stores all of the various managers
@@ -24,6 +25,7 @@ namespace Pillbox
 		GraphicsManager graphics;
 		ResourceManager resources;
 		SoundManager sounds;
+		ECS ecs = ECS();
 
 		//order in the way they are declared
 		Engine() : input(*this) , graphics(*this), resources(*this), sounds(*this){} //, graphics(*this) {}

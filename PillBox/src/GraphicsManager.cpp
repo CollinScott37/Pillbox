@@ -145,11 +145,7 @@ bool GraphicsManager::LoadImageFile( const string& name, const string& path )
     return true;
 }
 
-void GraphicsManager::LoadSprite(const string& name, vec2 pos, vec3 scale, real z)
-{
-    Sprite sprite = Sprite{name, pos, scale, z};
-    sprites.push_back(sprite);
-}
+
 
 void GraphicsManager::ShutDown()
 {
@@ -157,6 +153,7 @@ void GraphicsManager::ShutDown()
     sg_shutdown();
 }
 
+//void GraphicsManager::Draw(std::vector<Sprite>& sprites)
 void GraphicsManager::Draw()
 {
 
@@ -179,39 +176,41 @@ void GraphicsManager::Draw()
         uniforms.projection[0][0] /= window_width;
     }
     
-    for(Sprite sprite : sprites)
-    {
-        int image_width = imageMap[sprite.name].width;
-        int image_height = imageMap[sprite.name].width;
-        glm::vec2 position = sprite.position;
-        real z = sprite.z; //placeholder
-        glm::vec3 scale = sprite.scale; //placeholder
+    engine.ecs.ForEach<Sprite, Transform>([&](EntityID e)
+        {
+            Sprite s = engine.ecs.Get<Sprite>(e);
+            Transform t = engine.ecs.Get<Transform>(e);
 
-        //uniforms.transform = mat4{1};
-        //uniforms.transform = translate( mat4{1}, vec3( position, z ) );
-        //uniforms.transform *= glm::scale( mat4{1}, vec3( scale ) );
-        uniforms.transform = translate( mat4{1}, vec3( position, z ) ) * glm::scale( mat4{1}, vec3( scale.x,-scale.y, scale.z));//scale ) ); 
-        
-    
-        if( image_width < image_height ) {
-            uniforms.transform = uniforms.transform * glm::scale( mat4{1}, vec3( real(image_width)/image_height, 1.0, 1.0 ) );
-        } else {
-            uniforms.transform = uniforms.transform * glm::scale( mat4{1}, vec3( 1.0, real(image_height)/image_width, 1.0 ) );
-        }
-        
+            int image_width = imageMap[s.name].width;
+            int image_height = imageMap[s.name].width;
+            glm::vec2 position = t.position;
+            real z = s.z; //placeholder
+            glm::vec3 scale = t.scale; //placeholder
 
-        sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
+            //uniforms.transform = mat4{1};
+            //uniforms.transform = translate( mat4{1}, vec3( position, z ) );
+            //uniforms.transform *= glm::scale( mat4{1}, vec3( scale ) );
+            uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * glm::scale(mat4{ 1 }, vec3(scale.x, -scale.y, scale.z));//scale ) ); 
 
-        bindings.fs_images[0] = imageMap[sprite.name].data;
-        sg_apply_bindings(bindings);
-        sg_draw(0, 4, 1);
-    }
+
+            if (image_width < image_height) {
+                uniforms.transform = uniforms.transform * glm::scale(mat4{ 1 }, vec3(real(image_width) / image_height, 1.0, 1.0));
+            }
+            else {
+                uniforms.transform = uniforms.transform * glm::scale(mat4{ 1 }, vec3(1.0, real(image_height) / image_width, 1.0));
+            }
+
+
+            sg_apply_uniforms(SG_SHADERSTAGE_VS, 0, SG_RANGE(uniforms));
+
+            bindings.fs_images[0] = imageMap[s.name].data;
+            sg_apply_bindings(bindings);
+            sg_draw(0, 4, 1);
+        });
     sg_end_pass();
     sg_commit();
     glfwSwapBuffers(window);
-    /*
 
-    */
 }
 
 

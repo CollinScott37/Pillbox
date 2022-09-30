@@ -5,17 +5,6 @@
 
 using namespace Pillbox;
 
-/*
-Engine::Engine()	
-{
-	input = InputManager(this);
-}
-
-Engine::~Engine()
-{
-
-}
-*/
 
 void Engine::StartUp()
 {	
@@ -48,7 +37,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
 		
 		input.Update();
 
-		graphics.Draw();
+		//graphics.Draw();
 		
 		callback();
 

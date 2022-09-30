@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include <unordered_map>
+#include <vector>
 
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
@@ -17,16 +18,6 @@
 //#define STB_IMAGE_IMPLEMENTATION
 //#include "stb_image.h"
 
-namespace
-{
-    struct Sprite {
-        std::string name;
-        glm::vec2 position;
-        glm::vec3 scale;
-        double z;
-    };
-}
-
 namespace Pillbox
 {
     typedef double real;
@@ -38,12 +29,30 @@ namespace Pillbox
     class InputManager;
     class ResourceManager;
     class SoundManager;
+    class ECS;
+    typedef long EntityID;
 
+    typedef std::function<void(EntityID)> ForEachCallback;
     typedef std::function<void ()> UpdateCallback;
     typedef glm::vec2 vec2;
     typedef glm::vec3 vec3;
     typedef glm::vec4 vec4;
     typedef glm::mat4 mat4;
+
+    
+    struct Transform { vec3 position; vec3 rotation; vec3 scale; };
+    struct Sprite
+    {
+        std::string name; double z; 
+        
+    
+    };
+    
+    //struct Velocity { real x, y; }; // or: struct Velocity : public vec2 {};
+    //struct Gravity { real meters_per_second; };
+    ///struct Sprite { string image; real size; };
+    struct Health { real percent; };
+    struct Script { string name; };
 
     //std::function<"Return_Type"("Parameters");
 

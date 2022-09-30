@@ -23,9 +23,10 @@ namespace Pillbox
 		friend class InputManager;
 		void StartUp();
 		void ShutDown();
+		//void Draw(std::vector<Sprite>& sprites);
 		void Draw();
 		bool LoadImageFile( const string& name, const string& path );
-		void LoadSprite(const string&, vec2, vec3, real);
+		//void LoadSprite(const string&, vec2, vec3, real);
 		//void LoadSprite(Sprite sprite);
 		GLFWwindow* GetWindow();
 		
@@ -33,7 +34,7 @@ namespace Pillbox
 		void SetShouldQuit(bool);
 
 	private:
-		std::vector<Sprite> sprites;
+		//std::vector<Sprite> sprites;
 		int window_width = 1280;
 		int window_height = 720;
 		const char* window_name = "Pillbox";
