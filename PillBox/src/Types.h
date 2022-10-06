@@ -30,6 +30,8 @@ namespace Pillbox
     class ResourceManager;
     class SoundManager;
     class ECS;
+    class ScriptManager;
+
     typedef long EntityID;
 
     typedef std::function<void(EntityID)> ForEachCallback;
@@ -51,7 +53,7 @@ namespace Pillbox
     //struct Velocity { real x, y; }; // or: struct Velocity : public vec2 {};
     //struct Gravity { real meters_per_second; };
     ///struct Sprite { string image; real size; };
-    struct Health { real percent; };
+    //struct Health { real percent; };
     struct Script { string name; };
 
     //std::function<"Return_Type"("Parameters");

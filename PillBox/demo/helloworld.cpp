@@ -3,6 +3,9 @@
 #include "../src/Types.h"
 #include "../src/Engine.h"
 
+#define SOL_ALL_SAFETIES_ON 1
+#include <sol/sol.hpp>
+
 using namespace Pillbox;
 
 
@@ -12,8 +15,11 @@ int main(int argc, const char* argv[]) {
 
     Engine e;
     e.StartUp();
+    
+    
+    /*
     e.sounds.LoadSound("quack.wav", "sounds");
-
+    
 
     //gred
     EntityID gred = e.ecs.UnusedEntity();
@@ -27,20 +33,30 @@ int main(int argc, const char* argv[]) {
     e.ecs.Get<Transform>(goose) = Transform{ vec3(1), vec3(0), vec3(30,30,30) };
     e.graphics.LoadImageFile("goose.png", "images");
     
-
+    */
     std::cout << "done loading\n";
 
+
+    EntityID test = e.ecs.UnusedEntity();
+    e.scripts.LoadScript("test.lua", "scripts");
+    e.ecs.Get<Script>(test) = Script{ "test.lua" };
+    
+    
+
+ 
     e.RunGameLoop([&]() {
         
+        /*
         if (e.input.GetKeyCodeUp(GLFW_KEY_Q))
         {
             std::cout << "Quack!\n";
             e.sounds.PlaySound("quack.wav");
         }
 
+        
+        */
+
         e.graphics.Draw();
-
-
         return;
 
         });

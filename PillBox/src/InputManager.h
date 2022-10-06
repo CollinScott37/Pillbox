@@ -11,7 +11,7 @@ namespace Pillbox
 	{
 		
 	public:
-		int keys[26][2]; //keyid is index [0] is prev input [1] is current input
+		int keys[27][2]; //keyid is index [0] is prev input [1] is current input
 		Engine& engine;
 		InputManager(Engine& anEng) : engine(anEng) {}
 		void StartUp();
