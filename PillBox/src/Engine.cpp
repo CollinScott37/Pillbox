@@ -36,6 +36,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
 		auto t1 = std::chrono::steady_clock::now(); //start of tick
 		
 		input.Update();
+
 		scripts.Update();
 		//graphics.Draw();
 		

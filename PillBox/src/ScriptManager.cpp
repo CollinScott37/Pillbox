@@ -118,10 +118,8 @@ void ScriptManager::Update()
 	engine.ecs.ForEach<Script>([&](EntityID e)
 		{
 			Script s = engine.ecs.Get<Script>(e);
-			scripts[s.name]();
+			scripts[s.name](); //run script
 
-
-		
 		});
 	
 		

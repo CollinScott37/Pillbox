@@ -140,11 +140,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demo\helloworld.cpp" />
+    <ClCompile Include="src\ECS.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\GraphicsManager.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\ScriptManager.cpp" />
+    <ClCompile Include="src\SoundManager.cpp" />
+    <ClCompile Include="src\SparseSetHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ECS.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\GraphicsManager.h" />
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\ResourceManager.h" />
+    <ClInclude Include="src\ScriptManager.h" />
+    <ClInclude Include="src\SoundManager.h" />
+    <ClInclude Include="src\SparseSetHolder.h" />
     <ClInclude Include="src\Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
