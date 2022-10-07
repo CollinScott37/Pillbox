@@ -36,12 +36,18 @@ int main(int argc, const char* argv[]) {
     */
     std::cout << "done loading\n";
 
-
+    
+    
+    /* //Attempt 1
     EntityID test = e.ecs.UnusedEntity();
     e.scripts.LoadScript("test.lua", "scripts");
     e.ecs.Get<Script>(test) = Script{ "test.lua" };
-    
-    
+    */
+
+    //Atempt 2
+    e.scripts.LoadScript("test.lua", "scripts");
+    e.scripts.RunScript("test.lua");
+
 
  
     e.RunGameLoop([&]() {

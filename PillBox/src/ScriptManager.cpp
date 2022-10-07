@@ -102,14 +102,19 @@ bool ScriptManager::LoadScript(const string& name, const string& path)
 	if (scripts.count(name) == 0)
 	{
 		scripts[name] = lua.load_file(engine.resources.getPath(p).c_str());
-		EntityID entity = engine.ecs.UnusedEntity();
-		engine.ecs.Get<Script>(entity) = Script{ name };
 		return true;	
 	}
-	else
+	return false;
+}
+
+bool ScriptManager::RunScript(const string& name)
+{
+	if (scripts.count(name) == 1)
 	{
-		return false;
+		scripts[name]();
+		return true;
 	}
+	return false;
 }
 
 void ScriptManager::Update()

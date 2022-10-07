@@ -14,6 +14,7 @@ namespace Pillbox
 		ScriptManager(Engine& anEng) : engine(anEng) {}
 		void StartUp();
 		bool LoadScript(const string& name, const string& path);
+		bool RunScript(const string& name);
 		void Update();
 	private:
 		sol::state lua;
