@@ -107,11 +107,12 @@ bool ScriptManager::LoadScript(const string& name, const string& path)
 	return false;
 }
 
-bool ScriptManager::RunScript(const string& name)
+//bool ScriptManager::RunScript(const string& name)
+bool ScriptManager::RunScript(const string& name, EntityID id)
 {
 	if (scripts.count(name) == 1)
 	{
-		scripts[name]();
+		scripts[name](id);
 		return true;
 	}
 	return false;
@@ -123,7 +124,7 @@ void ScriptManager::Update()
 	engine.ecs.ForEach<Script>([&](EntityID e)
 		{
 			Script s = engine.ecs.Get<Script>(e);
-			scripts[s.name](); //run script
+			//scripts[s.name](); //run script
 
 		});
 	

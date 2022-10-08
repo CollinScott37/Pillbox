@@ -1,4 +1,4 @@
-gred = UnusedEntity()
+local id = ... --UnusedEntity()
 
 GredTransform = Transform.new(vec3.new(0), vec3.new(0), vec3(10,10,10))
 
@@ -10,7 +10,7 @@ GredTransform = Transform.new(vec3.new(0), vec3.new(0), vec3(10,10,10))
 
 -- Attempt 2
 LoadImageFile("goose.png", "images")
-GetSprite(gred) = Sprite.new("goose.png", 0.5)
+GetSprite(0) = Sprite.new("goose.png", 0.5)
 
 --GetTransform(gred) = GredTransform
 --LoadImageFile("goose.png", "images")

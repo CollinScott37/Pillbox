@@ -44,11 +44,15 @@ int main(int argc, const char* argv[]) {
     e.ecs.Get<Script>(test) = Script{ "test.lua" };
     */
 
-    //Atempt 2
+    /*  //Attempt 2
     e.scripts.LoadScript("test.lua", "scripts");
     e.scripts.RunScript("test.lua");
+    */
 
-
+    //Attempt 3
+    EntityID test = e.ecs.UnusedEntity();
+    e.scripts.LoadScript("test.lua", "scripts");
+    e.scripts.RunScript("test.lua", test);
  
     e.RunGameLoop([&]() {
         
