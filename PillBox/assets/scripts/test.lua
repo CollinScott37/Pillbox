@@ -1,16 +1,21 @@
-local id = ... --UnusedEntity()
+local id = ...
 
-GredTransform = Transform.new(vec3.new(0), vec3.new(0), vec3(10,10,10))
+if GetKeyCodeDown(KEYBOARD.D) then
+    pos = GetTransform(id).position
+    pos.x = pos.x + 1;
+end
 
+if GetKeyCodeDown(KEYBOARD.A) then
+    pos = GetTransform(id).position
+    pos.x = pos.x - 1;
+end
 
---    Attempt 1
---GredSprite = Sprite.new("goose.png", 0.5)
---GetSprite(gred) = GredSprite
+if GetKeyCodeDown(KEYBOARD.W) then
+    pos = GetTransform(id).position
+    pos.y = pos.y + 1;
+end
 
-
--- Attempt 2
-LoadImageFile("goose.png", "images")
-GetSprite(0) = Sprite.new("goose.png", 0.5)
-
---GetTransform(gred) = GredTransform
---LoadImageFile("goose.png", "images")
+if GetKeyCodeDown(KEYBOARD.S) then
+    pos = GetTransform(id).position
+    pos.y = pos.y - 1;
+end

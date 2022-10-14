@@ -86,11 +86,22 @@ void ScriptManager::StartUp()
 		"scale", &Transform::scale
 		);
 
+	lua.new_usertype<Trigger>("Trigger",
+		sol::constructors<Trigger()>(),
+		"tl", &Trigger::tl,
+		"br", &Trigger::br
+		);
+
+	lua.new_usertype<Target>("Trigger",
+		sol::constructors<Trigger()>(),
+		"target", &Target::target
+		);
+
 	//ECS Getters
-	lua.set_function("GetSprite", [&](const EntityID id) { return engine.ecs.Get<Sprite>(id); });
-	lua.set_function("GetTransform", [&](const EntityID id) { return engine.ecs.Get<Transform>(id); });
-
-
+	lua.set_function("GetSprite", [&](EntityID e) -> Sprite& { return engine.ecs.Get<Sprite>(e); });
+	lua.set_function("GetTransform", [&](const EntityID id) -> Transform& { return engine.ecs.Get<Transform>(id); });
+	lua.set_function("GetTrigger", [&](const EntityID id) -> Trigger& { return engine.ecs.Get<Trigger>(id); });
+	lua.set_function("GetTarget", [&](const EntityID id) -> Target& { return engine.ecs.Get<Target>(id); });
 
 }
 
@@ -112,7 +123,7 @@ bool ScriptManager::RunScript(const string& name, EntityID id)
 {
 	if (scripts.count(name) == 1)
 	{
-		scripts[name](id);
+		scripts[name](id);	
 		return true;
 	}
 	return false;
@@ -124,7 +135,8 @@ void ScriptManager::Update()
 	engine.ecs.ForEach<Script>([&](EntityID e)
 		{
 			Script s = engine.ecs.Get<Script>(e);
-			//scripts[s.name](); //run script
+
+			scripts[s.name](e); //run script
 
 		});
 	

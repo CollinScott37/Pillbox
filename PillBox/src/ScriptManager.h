@@ -17,8 +17,9 @@ namespace Pillbox
 		//bool RunScript(const string& name);
 		bool RunScript(const string& name, EntityID id);
 		void Update();
-	private:
 		sol::state lua;
+	private:
+		
 		std::unordered_map< string, sol::load_result > scripts;
 	};
 }

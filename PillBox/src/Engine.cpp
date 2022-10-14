@@ -12,6 +12,7 @@ void Engine::StartUp()
 	input.StartUp();
 	resources.StartUp();
 	sounds.StartUp();
+	scripts.StartUp();
 }
 
 void Engine::ShutDown()
@@ -20,6 +21,7 @@ void Engine::ShutDown()
 	input.ShutDown();
 	resources.ShutDown();
 	sounds.ShutDown();
+	//scripts.ShutDown();
 }
 
 

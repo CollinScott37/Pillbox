@@ -44,10 +44,10 @@ void GraphicsManager::StartUp()
     // A vertex buffer containing a textured square.
     const float vertices[] = {
         // positions      // texcoords
-        -1.0f,  -1.0f,    0.0f,  0.0f,
-         1.0f,  -1.0f,    1.0f,  0.0f,
-        -1.0f,   1.0f,    0.0f,  1.0f,
-         1.0f,   1.0f,    1.0f,  1.0f,
+        -1.0f,  -1.0f,    0.0f,  1.0f,
+         1.0f,  -1.0f,    1.0f,  1.0f,
+        -1.0f,   1.0f,    0.0f,  0.0f,
+         1.0f,   1.0f,    1.0f,  0.0f,
     };
 
 
@@ -190,7 +190,7 @@ void GraphicsManager::Draw()
             //uniforms.transform = mat4{1};
             //uniforms.transform = translate( mat4{1}, vec3( position, z ) );
             //uniforms.transform *= glm::scale( mat4{1}, vec3( scale ) );
-            uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * glm::scale(mat4{ 1 }, vec3(scale.x, -scale.y, scale.z));//scale ) ); 
+            uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * glm::scale(mat4{ 1 }, vec3(scale.x, scale.y, scale.z));//scale ) ); 
 
 
             if (image_width < image_height) {

@@ -43,13 +43,9 @@ namespace Pillbox
 
     
     struct Transform { vec3 position; vec3 rotation; vec3 scale; };
-    struct Sprite
-    {
-        std::string name; double z; 
-        
-    
-    };
-    
+    struct Sprite { std::string name; double z; };
+    struct Trigger { vec3 tl; vec3 br; };
+    struct Target { Transform target; };
     //struct Velocity { real x, y; }; // or: struct Velocity : public vec2 {};
     //struct Gravity { real meters_per_second; };
     ///struct Sprite { string image; real size; };
