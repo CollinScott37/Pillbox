@@ -26,7 +26,8 @@ if id == gCurrLetter then
             local no = "nothing" .. gCurrLetter .. ".png"
             print("is at: ", no)
             GetSprite(nothing1).name = no
-            
+            GetTransform(nothing1).scale.x = GetTransform(nothing1).scale.x + 14
+            GetTransform(nothing1).scale.y = GetTransform(nothing1).scale.y + 14
         end
     end
 elseif id > gCurrLetter then

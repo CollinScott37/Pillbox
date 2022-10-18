@@ -203,7 +203,7 @@ GetSprite(nothing1).name = "nothing1.png"
 GetSprite(nothing1).z = 0.9
 GetTransform(nothing1).position = vec3.new(0, 0, 0)
 GetTransform(nothing1).rotation = vec3.new(0)
-GetTransform(nothing1).scale = vec3.new(100,100,0)
+GetTransform(nothing1).scale = vec3.new(0,0,0)
 
 --[[
 --nothing 2
