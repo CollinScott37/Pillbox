@@ -31,7 +31,7 @@ namespace Pillbox
     class SoundManager;
     class ECS;
     class ScriptManager;
-
+    class MazeManager;
     typedef long EntityID;
 
     typedef std::function<void(EntityID)> ForEachCallback;

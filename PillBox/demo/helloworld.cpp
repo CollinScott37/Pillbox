@@ -35,7 +35,7 @@ int main(int argc, const char* argv[]) {
     
     */
     std::cout << "done loading\n";
-
+    /*
     EntityID goose = e.ecs.UnusedEntity();
     EntityID N0 = e.ecs.UnusedEntity();
     EntityID O = e.ecs.UnusedEntity();
@@ -68,7 +68,7 @@ int main(int argc, const char* argv[]) {
     e.ecs.Get<Script>(E) = Script{ "cube.lua" };
     e.ecs.Get<Script>(QM) = Script{ "cube.lua" };
     //  e.ecs.Get<Script>(O) = Script{ "cube.lua" };
- 
+    */
 
     
 

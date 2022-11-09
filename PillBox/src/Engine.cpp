@@ -12,7 +12,9 @@ void Engine::StartUp()
 	input.StartUp();
 	resources.StartUp();
 	sounds.StartUp();
+	maze.StartUp();
 	scripts.StartUp();
+	
 }
 
 void Engine::ShutDown()
