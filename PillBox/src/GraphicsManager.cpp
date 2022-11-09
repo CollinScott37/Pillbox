@@ -186,12 +186,8 @@ void GraphicsManager::Draw()
             glm::vec2 position = t.position;
             real z = s.z; //placeholder
             glm::vec3 scale = t.scale; //placeholder
-
-            //uniforms.transform = mat4{1};
-            //uniforms.transform = translate( mat4{1}, vec3( position, z ) );
-            //uniforms.transform *= glm::scale( mat4{1}, vec3( scale ) );
+            
             uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * glm::scale(mat4{ 1 }, vec3(scale.x, scale.y, scale.z));//scale ) ); 
-
 
             if (image_width < image_height) {
                 uniforms.transform = uniforms.transform * glm::scale(mat4{ 1 }, vec3(real(image_width) / image_height, 1.0, 1.0));
@@ -207,6 +203,7 @@ void GraphicsManager::Draw()
             sg_apply_bindings(bindings);
             sg_draw(0, 4, 1);
         });
+    
     sg_end_pass();
     sg_commit();
     glfwSwapBuffers(window);

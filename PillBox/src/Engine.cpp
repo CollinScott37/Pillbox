@@ -45,11 +45,7 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
 		callback();
 
 		isdone = graphics.ShouldQuit() || input.GetKeyCodeDown(GLFW_KEY_ESCAPE);
-		
-		
-
-
-
+	
 		auto t2 = std::chrono::steady_clock::now(); //end of tick
 		auto time_took = t2 - t1;
 

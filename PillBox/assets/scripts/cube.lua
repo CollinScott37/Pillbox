@@ -4,9 +4,9 @@ local id = ...
 
 if id == gCurrLetter then
     
-    GetTransform(id).scale = vec3.new(20)
-    GetSprite(id).z = 0.5
-    local goosePos = GetTransform(gGoose).position
+    GetTransform(id).scale = vec3.new(20);
+    GetSprite(id).z = 0.5;
+    local goosePos = GetTransform(gGoose).position;
 
     --print(goosePos.x, goosePos.y, "\n")
 
@@ -21,6 +21,26 @@ if id == gCurrLetter then
             if(id > 2) then
                 GetTransform(id).position.x = glPos.x + (25 * id) + 10
             end
+
+
+            --[[
+
+            --start for cane
+            if(id == gN0) then
+                GetTransform(id).scale.y = 0
+                GetTransform(id).scale.z = 0
+                GetTransform(id).scale.x = 0
+            end
+            if(id == gO) then
+                GetTransform(id).scale.x = 0
+                GetTransform(id).scale.y = 0
+                GetTransform(id).scale.z = 0
+            end
+             --end of for cane 
+             --CANE IS A DONGLE
+             
+            --]]
+
             GetTransform(id).position.y = glPos.y
             gCurrLetter = gCurrLetter + 1
             local no = "nothing" .. gCurrLetter .. ".png"

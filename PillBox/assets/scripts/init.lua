@@ -18,9 +18,12 @@ print("running init\n");
 
 LoadSound("quack.wav", "sounds")
 
+
+--Can do sprite = GetSprite(goose)
 --Goose
 LoadImageFile("goose.png", "images")
 GetSprite(goose).name = "goose.png"
+
 GetSprite(goose).z = 0.5
 GetTransform(goose).position = vec3.new(0)
 GetTransform(goose).rotation = vec3.new(0)
