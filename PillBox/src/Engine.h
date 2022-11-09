@@ -7,8 +7,9 @@
 #include "ResourceManager.h"
 #include "SoundManager.h"
 #include "ECS.h"
-#include "ScriptManager.h"
 #include "MazeManager.h"
+#include "ScriptManager.h"
+
 
 /*	
 	Stores all of the various managers

@@ -20,6 +20,9 @@ namespace Pillbox
 		int width = 20;
 		int height = 20;
 
+		const int wall = 0;
+		const int unvisited = 1;
+		const int visited = 2;
 
 	};
 }

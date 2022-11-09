@@ -1,9 +1,7 @@
 #include "MazeManager.h"
 #include "Engine.h"
 
-#define wall 0
-#define unvisited 1
-#define visited 2
+
 
 using namespace Pillbox;
 
@@ -13,9 +11,7 @@ void MazeManager::StartUp()
 {
 	engine.graphics.LoadImageFile("visited.png", "images");
 	engine.graphics.LoadImageFile("wall.png", "images");
-
-	std::vector<std::vector<int>> v(width, std::vector<int>(height, unvisited));
-	maze = v;
+	
 	if (width % 2 == 0)
 	{
 		width += 1;
@@ -25,24 +21,27 @@ void MazeManager::StartUp()
 		height += 1;
 	}
 
-	// 0 = wall
-	// 1 == unvisited
-	// 2 == visited
+	std::vector<std::vector<int>> v(width, std::vector<int>(height, unvisited));
+	maze = v;
+	
 	for (int i = 0; i < height; i += 1)
 	{
 		for (int j = 0; j < width; j += 1)
 		{
+			//other other row and column
 			if (i % 2 == 1 || j % 2 == 1)
 			{
-				maze[i][j] = wall; //wall
+				maze[i][j] = wall;
 			}
+			
+			//if the bordeers of maze
 			if (i == 0 || j == 0 || i == height - 1 || j == width - 1)
 			{
-				maze[i][j] = visited; //visited
+				maze[i][j] = visited;
 			}
 		}
 	}
-
+	
 	std::cout << "\nBefore\n";
 	PrintMaze();
 	GenerateMaze(2, 2);
@@ -156,23 +155,31 @@ void MazeManager::PrintMaze()
 
 void MazeManager::MazeToScreen()
 {
-
+	std::cout << "inside of MazeToScreen\n";
 	for (int i = 0; i < height; i += 1)
 	{
 		for (int j = 0; j < width; j += 1)
 		{
 			EntityID id = engine.ecs.UnusedEntity();
-			engine.ecs.Get<Transform>(id) = Transform{ vec3(i,j,0), vec3(0), vec3(20,20,1) };
-			
+
+			engine.ecs.Get<Transform>(id).position = vec3( i * 4,  j * 4,1);
+			engine.ecs.Get<Transform>(id).rotation = vec3(0);
+			engine.ecs.Get<Transform>(id).scale = vec3(10, 10, 10);
+			std::cout << maze[i][j];
 			if (maze[i][j] == visited)
 			{
-				engine.ecs.Get<Sprite>(id) = Sprite{ "visited.png", 0.5 };
+				engine.ecs.Get<Sprite>(id).name = "visited.png";
+				engine.ecs.Get<Sprite>(id).z = 0.5f;
 			}
 			else if (maze[i][j] == wall)
 			{
-				engine.ecs.Get<Sprite>(id) = Sprite{ "wall.png", 0.5 };
+				engine.ecs.Get<Sprite>(id).name = "wall.png";
+				engine.ecs.Get<Sprite>(id).z = 0.5f;
 			}
 
 		}
+		std::cout << "\n";
 	}
+
+	std::cout << "\nthere are " << engine.ecs.UnusedEntity() << "entities\n";
 }
