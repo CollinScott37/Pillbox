@@ -9,6 +9,7 @@ using namespace Pillbox;
 
 void MazeManager::StartUp()
 {
+	
 	engine.graphics.LoadImageFile("visited.png", "images");
 	engine.graphics.LoadImageFile("wall.png", "images");
 	
@@ -20,47 +21,120 @@ void MazeManager::StartUp()
 	{
 		height += 1;
 	}
-
-	std::vector<std::vector<int>> v(width, std::vector<int>(height, unvisited));
-	maze = v;
 	
-	for (int i = 0; i < height; i += 1)
+	CreateMaze();
+	
+
+
+	
+	
+}
+
+void MazeManager::CreateMaze()
+{
+	if (!alreadyCreatedMaze)
 	{
-		for (int j = 0; j < width; j += 1)
+		srand(50);
+		std::vector<std::vector<int>> v(width, std::vector<int>(height, unvisited));
+		maze = v;
+	}
+
+
+	//srand(time(NULL));
+	rand();
+
+	bool normalBlock = false;
+	for (int j = 0; j < height; j += 1)
+	{
+		for (int i = 0; i < width; i += 1)
 		{
 			//other other row and column
 			if (i % 2 == 1 || j % 2 == 1)
 			{
 				maze[i][j] = wall;
+				normalBlock = true;
 			}
-			
-			//if the bordeers of maze
-			if (i == 0 || j == 0 || i == height - 1 || j == width - 1)
+
+			if (i == 0 || j == 0 || i == width - 1 || j == height - 1) //if the borders of maze
 			{
 				maze[i][j] = visited;
+				normalBlock = true;
 			}
+
+			if (!normalBlock)
+			{
+				maze[i][j] = unvisited;
+			}
+			normalBlock = false;
+
 		}
 	}
-	
-	std::cout << "\nBefore\n";
-	PrintMaze();
-	GenerateMaze(2, 2);
+
+	//std::cout << "\nBefore\n";
+	//PrintMaze();
+	int startx = 2;
+	int starty = 2;
+	vec2 startIndex = CreateRandomValidMazeIndex(true);
+	//std::cout << "at: " << startIndex.x << ", " << startIndex.y << "\n";
+	GenerateMazeFromPos(startIndex.x, startIndex.y);
 
 	std::cout << "\nfinal version\n";
 	PrintMaze();
+
 	MazeToScreen();
 }
 
+vec3 MazeManager::MazeIndexToWorldPos(vec3 pos)
+{
+	return MazeIndexToWorldPos(pos.x, pos.y);
+}
 
-void MazeManager::GenerateMaze(int x, int y)
+vec3 MazeManager::MazeIndexToWorldPos(int i, int j)
+{
+	float x = (i - (width / (2))) * xyscale;
+	float y = (j - (height / (2))) * xyscale;
+
+	return vec3(x, -y, 0);
+}
+
+vec3 MazeManager::CreateRandomValidMazeIndex(bool isStartIndex)
+{
+	int i = -1;
+	int j = -1;
+
+	while (true)
+	{
+		if (isStartIndex)
+		{
+			i = (rand() % (width - 4)) + 2;
+			j = (rand() % (height - 4)) + 2;
+			//std::cout << "AAA: " << i << ", " << j << "\n";
+			if (i % 2 == 0 && j % 2 == 0)
+			{
+				return vec3(i, j, 0);
+			}
+		}
+		else
+		{
+			i = (rand() % (width - 4)) + 2;
+			j = (rand() % (height - 4)) + 2;
+			//std::cout << "BBB: " << i << ", " << j << "\n";
+			if (maze[i][j] == visited)
+			{
+				return vec3(i, j, 0);
+			}
+		}
+
+	}
+
+
+}
+
+
+void MazeManager::GenerateMazeFromPos(int x, int y)
 {
 	
 	maze[x][y] = visited;
-	if (x == 1 && y == 1 && maze[x][y] == unvisited)
-	{
-		//stuff
-	}
-	
 
 	int count = 0;
 	//0 = up
@@ -76,7 +150,7 @@ void MazeManager::GenerateMaze(int x, int y)
 			if (maze[x][y - 2] == unvisited)
 			{
 				maze[x][y - 1] = visited;
-				GenerateMaze(x, y - 2);
+				GenerateMazeFromPos(x, y - 2);
 			}
 			else
 			{
@@ -90,7 +164,7 @@ void MazeManager::GenerateMaze(int x, int y)
 			if (maze[x][y + 2] == unvisited)
 			{
 				maze[x][y + 1] = visited;
-				GenerateMaze(x, y + 2);
+				GenerateMazeFromPos(x, y + 2);
 			}
 			else
 			{
@@ -104,7 +178,7 @@ void MazeManager::GenerateMaze(int x, int y)
 			if (maze[x - 2][y] == unvisited)
 			{
 				maze[x-1][y] = visited;
-				GenerateMaze(x - 2, y);
+				GenerateMazeFromPos(x - 2, y);
 			}
 			else
 			{
@@ -118,7 +192,7 @@ void MazeManager::GenerateMaze(int x, int y)
 			if (maze[x + 2][y] == unvisited)
 			{
 				maze[x + 1][y] = visited;
-				GenerateMaze(x + 2, y);
+				GenerateMazeFromPos(x + 2, y);
 			}
 			else
 			{
@@ -142,11 +216,19 @@ void MazeManager::GenerateMaze(int x, int y)
 
 void MazeManager::PrintMaze()
 {
-	for (int i = 0; i < height; i += 1)
+	for (int j = 0; j < height; j += 1)
 	{
-		for (int j = 0; j < width; j += 1)
+		for (int i = 0; i < width; i += 1)
 		{
-			std::cout << maze[i][j];
+			if (maze[i][j] == wall)
+			{
+				std::cout << "#";
+			}
+			else
+			{
+				std::cout << " ";
+			}
+			
 		}
 		std::cout << "\n";
 	}
@@ -155,17 +237,30 @@ void MazeManager::PrintMaze()
 
 void MazeManager::MazeToScreen()
 {
-	std::cout << "inside of MazeToScreen\n";
-	for (int i = 0; i < height; i += 1)
+	//std::cout << "inside of MazeToScreen\n";
+	for (int j = 0; j < height; j += 1)
 	{
-		for (int j = 0; j < width; j += 1)
+		for (int i = 0; i < width; i += 1)
 		{
-			EntityID id = engine.ecs.UnusedEntity();
-
-			engine.ecs.Get<Transform>(id).position = vec3( i * 4,  j * 4,1);
+			EntityID id = 0; //placeHolder
+			if (!alreadyCreatedMaze)
+			{
+				 id = engine.ecs.UnusedEntity();
+			}
+			else
+			{
+				id = (i * height) + j;
+			}
+			
+			
+			
+			//float x =  (i - (width / (2))) * xyscale;
+			//float y = (j - (height / (2))) * xyscale;
+			
+			engine.ecs.Get<Transform>(id).position = MazeIndexToWorldPos(i,j);//vec3((j - width/2) + height/2, -((i + height/2) + width/2),1);
 			engine.ecs.Get<Transform>(id).rotation = vec3(0);
-			engine.ecs.Get<Transform>(id).scale = vec3(10, 10, 10);
-			std::cout << maze[i][j];
+			engine.ecs.Get<Transform>(id).scale = vec3(1, 1, 1) * (xyscale/2);
+			
 			if (maze[i][j] == visited)
 			{
 				engine.ecs.Get<Sprite>(id).name = "visited.png";
@@ -174,12 +269,13 @@ void MazeManager::MazeToScreen()
 			else if (maze[i][j] == wall)
 			{
 				engine.ecs.Get<Sprite>(id).name = "wall.png";
-				engine.ecs.Get<Sprite>(id).z = 0.5f;
+				engine.ecs.Get<Sprite>(id).z = 0.2f;
 			}
 
 		}
-		std::cout << "\n";
 	}
 
-	std::cout << "\nthere are " << engine.ecs.UnusedEntity() << "entities\n";
+	alreadyCreatedMaze = true;
+
+	//std::cout << "\nthere are " << engine.ecs.UnusedEntity() << "entities\n";
 }

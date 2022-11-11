@@ -15,12 +15,36 @@ int main(int argc, const char* argv[]) {
 
     Engine e;
     e.StartUp();
-    
-    
-    /*
-    e.sounds.LoadSound("quack.wav", "sounds");
-    
+    vec3 letterScale = vec3(5, 5, 1);
+    auto InitMazeObject = [&](int id, string n)
+    {
+        //Sprite
+        if (n != "null")
+        {
+            e.graphics.LoadImageFile(n, "images");
+            e.ecs.Get<Sprite>(id) = Sprite{ n, 0.4 };
+        }
 
+        
+        //Maze
+        vec3 mi = e.maze.CreateRandomValidMazeIndex(false);
+        e.ecs.Get<MazeObject>(id) = MazeObject{ mi, false };
+
+        //Transform
+        vec3 wp = e.maze.MazeIndexToWorldPos(mi);
+        e.ecs.Get<Transform>(id) = Transform{ wp, vec3(0), letterScale };
+
+        //Colliders
+        vec3 tl = vec3(0);
+        vec3 br = vec3(0);
+        //tl = (pos.x + radius) * scale.x
+        tl.x = (wp.x - letterScale.x / 2);// * GetTransform(cube1).scale.x
+        tl.y = (wp.y + letterScale.x / 2);// * GetTransform(cube1).scale.y
+        br.x = (wp.x + letterScale.x / 2);// * GetTransform(cube1).scale.x
+        br.y = (wp.y - letterScale.x / 2);// * GetTransform(cube1).scale.y
+        e.ecs.Get<Trigger>(id) = Trigger{ tl, br };
+    };
+    /*
     //gred
     EntityID gred = e.ecs.UnusedEntity();
     e.ecs.Get<Sprite>(gred) = Sprite{"gred.png", 0.5};
@@ -28,15 +52,19 @@ int main(int argc, const char* argv[]) {
     e.graphics.LoadImageFile("gred.png", "images");
 
     //Goose
-    EntityID goose = e.ecs.UnusedEntity();
-    e.ecs.Get<Sprite>(goose) = Sprite{ "goose.png", 0.65 };
-    e.ecs.Get<Transform>(goose) = Transform{ vec3(1), vec3(0), vec3(30,30,30) };
-    e.graphics.LoadImageFile("goose.png", "images");
-    
     */
+    EntityID cube = e.ecs.UnusedEntity();
+    e.ecs.Get<Sprite>(cube) = Sprite{ "cube.png", 0.1 };
+    e.ecs.Get<Transform>(cube) = Transform{ vec3(0), vec3(0), vec3(1,1,1) };
+    e.graphics.LoadImageFile("cube.png", "images");
+
+
+    
+    
     std::cout << "done loading\n";
-    /*
+    
     EntityID goose = e.ecs.UnusedEntity();
+    
     EntityID N0 = e.ecs.UnusedEntity();
     EntityID O = e.ecs.UnusedEntity();
     EntityID C = e.ecs.UnusedEntity();
@@ -44,18 +72,29 @@ int main(int argc, const char* argv[]) {
     EntityID N1 = e.ecs.UnusedEntity();
     EntityID E = e.ecs.UnusedEntity();
     EntityID QM = e.ecs.UnusedEntity();
-    EntityID corner1 = e.ecs.UnusedEntity();
-    EntityID corner2 = e.ecs.UnusedEntity();
-    //For Initiating images, sound
-    EntityID init = e.ecs.UnusedEntity();
-    string p = "scripts/init.lua";
-    auto initLoad = e.scripts.lua.load_file(e.resources.getPath(p).c_str());
-    initLoad(goose, N0, O, C, A, N1, E, QM,  corner1, corner2); //run init
 
+    //objects
+    InitMazeObject(N0, "n.png");
+    InitMazeObject(O, "o.png");
+    InitMazeObject(C, "c.png");
+    InitMazeObject(A, "a.png");
+    InitMazeObject(N1, "n.png");
+    InitMazeObject(E, "e.png");
+    InitMazeObject(QM, "qm.png");
+
+    //Sounds
+    e.sounds.LoadSound("quack.wav", "sounds");
+
+    //EntityID corner1 = e.ecs.UnusedEntity();
+    //EntityID corner2 = e.ecs.UnusedEntity();
+    
+
+    /*
     EntityID Sounds = e.ecs.UnusedEntity();
     e.scripts.LoadScript("soundscript.lua", "scripts");
     e.ecs.Get<Script>(Sounds) = Script{ "soundscript.lua" };
-
+    */
+    /*
     e.scripts.LoadScript("test.lua", "scripts");
     e.ecs.Get<Script>(goose) = Script{ "test.lua" };
 
@@ -67,7 +106,6 @@ int main(int argc, const char* argv[]) {
     e.ecs.Get<Script>(N1) = Script{ "cube.lua" };
     e.ecs.Get<Script>(E) = Script{ "cube.lua" };
     e.ecs.Get<Script>(QM) = Script{ "cube.lua" };
-    //  e.ecs.Get<Script>(O) = Script{ "cube.lua" };
     */
 
     
@@ -75,6 +113,19 @@ int main(int argc, const char* argv[]) {
     e.RunGameLoop([&]() {
         
         e.graphics.Draw();
+        
+        if (e.input.GetKeyCodeUp(GLFW_KEY_Q))
+        {
+            std::cout << "quack\n";
+            e.sounds.PlaySound("quack.wav");
+            e.maze.CreateMaze();
+            for (int i = N0; i <= QM; i += 1)
+            {
+                InitMazeObject(i, "null");
+            }
+
+        }
+
         return;
 
         });

@@ -92,17 +92,39 @@ void ScriptManager::StartUp()
 		"br", &Trigger::br
 		);
 
-	lua.new_usertype<Target>("Trigger",
-		sol::constructors<Trigger()>(),
+	lua.new_usertype<Target>("Target",
+		sol::constructors<Target()>(),
 		"target", &Target::target
 		);
+	
+	lua.new_usertype<MazeObject>("MazeObject",
+		sol::constructors<MazeObject()>(),
+		"mazeIndex", &MazeObject::mazeIndex,
+		"isFound", &MazeObject::isFound
+		);
 
+	/*
+	lua.new_usertype<Script>("Script",
+		sol::constructors<Script()>(),
+		"name", &Script::name
+		);
+	*/
 	//ECS Getters
-	lua.set_function("GetSprite", [&](EntityID e) -> Sprite& { return engine.ecs.Get<Sprite>(e); });
+	lua.set_function("GetSprite", [&](const EntityID e) -> Sprite& { return engine.ecs.Get<Sprite>(e); });
 	lua.set_function("GetTransform", [&](const EntityID id) -> Transform& { return engine.ecs.Get<Transform>(id); });
 	lua.set_function("GetTrigger", [&](const EntityID id) -> Trigger& { return engine.ecs.Get<Trigger>(id); });
 	lua.set_function("GetTarget", [&](const EntityID id) -> Target& { return engine.ecs.Get<Target>(id); });
+	lua.set_function("GetMazeObject", [&](const EntityID id) -> MazeObject& { return engine.ecs.Get<MazeObject>(id); });
+	//lua.set_function("GetScript", [&](const EntityID id) -> Script& { return engine.ecs.Get<Script>(id); });
+	
+	//Maze Manager
+	//lua.set_function("CreateMaze", [&]() { engine.maze.CreateMaze(); });
+	lua.set_function("MazeIndexToWorldPos", [&](const int x, const int y) { return engine.maze.MazeIndexToWorldPos(x, y); });
+	lua.set_function("MazeIndexToWorldPosVec", [&](const vec3 index) { return engine.maze.MazeIndexToWorldPos(index); });
+	lua.set_function("CreateRandomValidMazeIndex", [&](const bool value) { return engine.maze.CreateRandomValidMazeIndex(value); });
 
+	//self
+	//lua.set_function("LoadScript", [&](const string& n, const string& p) { return engine.scripts.LoadScript(n,p); });
 }
 
 
