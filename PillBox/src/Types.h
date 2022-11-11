@@ -31,7 +31,7 @@ namespace Pillbox
     class SoundManager;
     class ECS;
     class ScriptManager;
-
+    class MazeManager;
     typedef long EntityID;
 
     typedef std::function<void(EntityID)> ForEachCallback;
@@ -46,11 +46,9 @@ namespace Pillbox
     struct Sprite { std::string name; double z; };
     struct Trigger { vec3 tl; vec3 br; };
     struct Target { Transform target; };
-    //struct Velocity { real x, y; }; // or: struct Velocity : public vec2 {};
-    //struct Gravity { real meters_per_second; };
-    ///struct Sprite { string image; real size; };
-    //struct Health { real percent; };
-    struct Script { string name; };
+
+    struct MazeObject { vec3 mazeIndex; bool isFound = false; };
+    struct Script { std::string name; };
 
     //std::function<"Return_Type"("Parameters");
 

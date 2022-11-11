@@ -12,7 +12,9 @@ void Engine::StartUp()
 	input.StartUp();
 	resources.StartUp();
 	sounds.StartUp();
+	maze.StartUp();
 	scripts.StartUp();
+	
 }
 
 void Engine::ShutDown()
@@ -45,9 +47,13 @@ void Engine::RunGameLoop(const UpdateCallback& callback)
 		callback();
 
 		isdone = graphics.ShouldQuit() || input.GetKeyCodeDown(GLFW_KEY_ESCAPE);
-	
+		
+		
+		
+
 		auto t2 = std::chrono::steady_clock::now(); //end of tick
 		auto time_took = t2 - t1;
+
 
 		std::this_thread::sleep_for(one_sixteith_of_a_second - time_took);
 	}

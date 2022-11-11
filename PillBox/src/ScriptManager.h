@@ -21,5 +21,6 @@ namespace Pillbox
 	private:
 		
 		std::unordered_map< string, sol::load_result > scripts;
+		
 	};
 }

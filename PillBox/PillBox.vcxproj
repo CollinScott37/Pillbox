@@ -144,6 +144,7 @@
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\GraphicsManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\MazeManager.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ScriptManager.cpp" />
     <ClCompile Include="src\SoundManager.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\GraphicsManager.h" />
     <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\MazeManager.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\ScriptManager.h" />
     <ClInclude Include="src\SoundManager.h" />

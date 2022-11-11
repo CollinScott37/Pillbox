@@ -78,7 +78,7 @@ namespace Pillbox
 		
 
 	private:
-		EntityID nextAvailableID;
+		EntityID nextAvailableID = 0;
 		std::vector< std::unique_ptr< SparseSetHolder > > m_components;
 	};
 }

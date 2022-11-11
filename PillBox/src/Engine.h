@@ -7,7 +7,9 @@
 #include "ResourceManager.h"
 #include "SoundManager.h"
 #include "ECS.h"
+#include "MazeManager.h"
 #include "ScriptManager.h"
+
 
 /*	
 	Stores all of the various managers
@@ -27,10 +29,12 @@ namespace Pillbox
 		ResourceManager resources;
 		SoundManager sounds;
 		ECS ecs = ECS();
+		MazeManager maze;
 		ScriptManager scripts;
+		
 
 		//order in the way they are declared
-		Engine() : input(*this) , graphics(*this), resources(*this), sounds(*this), scripts(*this) {} //, graphics(*this) {}
+		Engine() : input(*this) , graphics(*this), resources(*this), sounds(*this), maze(*this), scripts(*this) {} //, graphics(*this) {}
 		//~Engine();
 		void StartUp();
 		void ShutDown();
