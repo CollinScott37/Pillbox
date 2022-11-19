@@ -14,7 +14,7 @@ void Engine::StartUp()
 	sounds.StartUp();
 	maze.StartUp();
 	scripts.StartUp();
-	
+	pathfinder.StartUp();
 }
 
 void Engine::ShutDown()

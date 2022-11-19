@@ -77,7 +77,6 @@ void ScriptManager::StartUp()
 			[](float f, const glm::vec3& v1) -> glm::vec3 { return f * v1; }
 		)
 		);
-
 	
 	lua.new_usertype<Transform>("Transform",
 		sol::constructors<Transform()>(),
@@ -122,6 +121,11 @@ void ScriptManager::StartUp()
 	lua.set_function("MazeIndexToWorldPos", [&](const int x, const int y) { return engine.maze.MazeIndexToWorldPos(x, y); });
 	lua.set_function("MazeIndexToWorldPosVec", [&](const vec3 index) { return engine.maze.MazeIndexToWorldPos(index); });
 	lua.set_function("CreateRandomValidMazeIndex", [&](const bool value) { return engine.maze.CreateRandomValidMazeIndex(value); });
+
+	//Path Find Manager
+	lua.set_function("getPath", [&]() {return engine.pathfinder.getPath();});
+	lua.set_function("findPath", [&](const vec2 start) {engine.pathfinder.findPath(start);});
+	lua.set_function("setGoal", [&](const vec2 newGoal) {engine.pathfinder.setGoal(newGoal);});
 
 	//self
 	//lua.set_function("LoadScript", [&](const string& n, const string& p) { return engine.scripts.LoadScript(n,p); });

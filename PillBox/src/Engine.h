@@ -8,6 +8,7 @@
 #include "SoundManager.h"
 #include "ECS.h"
 #include "MazeManager.h"
+#include "PathFindManager.h"
 #include "ScriptManager.h"
 
 
@@ -30,6 +31,7 @@ namespace Pillbox
 		SoundManager sounds;
 		ECS ecs = ECS();
 		MazeManager maze;
+		PathFind pathfinder;
 		ScriptManager scripts;
 		
 

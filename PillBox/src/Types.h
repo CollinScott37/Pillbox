@@ -4,6 +4,7 @@
 #include <functional>
 #include <unordered_map>
 #include <vector>
+#include <stack>
 
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"

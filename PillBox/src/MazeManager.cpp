@@ -23,11 +23,6 @@ void MazeManager::StartUp()
 	}
 	
 	CreateMaze();
-	
-
-
-	
-	
 }
 
 void MazeManager::CreateMaze()
