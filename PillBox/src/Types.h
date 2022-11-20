@@ -35,6 +35,7 @@ namespace Pillbox
     class ECS;
     class ScriptManager;
     class MazeManager;
+    class PathFind;
     typedef long EntityID;
 
     typedef std::function<void(EntityID)> ForEachCallback;

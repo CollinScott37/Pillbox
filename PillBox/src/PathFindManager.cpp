@@ -4,7 +4,7 @@
 using namespace Pillbox;
 
 //resets important variables
-void Pillbox::PathFind::StartUp()
+void PathFind::StartUp()
 {
 	visitedNodes = std::vector<std::vector<bool>>(engine.maze.width, std::vector<bool>(engine.maze.height, false));
 	parentList = std::vector<std::vector<vec2>>(engine.maze.width, std::vector<vec2>(engine.maze.height, vec2(-1, -1)));
@@ -23,7 +23,7 @@ void Pillbox::PathFind::StartUp()
 
 //used in findPath to calculate the heuristic
 //only calculates for movement in 4 directions
-int Pillbox::PathFind::calculateManhattan(vec2 node)
+int PathFind::calculateManhattan(vec2 node)
 {
 	int dx = abs(node.x - goal.x);
 	int dy = abs(node.y - goal.y);
@@ -31,7 +31,7 @@ int Pillbox::PathFind::calculateManhattan(vec2 node)
 }
 
 //checks if a given node is outside of the maze, a wall, or valid
-bool Pillbox::PathFind::isValid(vec2 node)
+bool PathFind::isValid(vec2 node)
 {
 	//out of bounds node
 	if (node.x < 0 || node.y < 0 || node.x >= engine.maze.width || node.y >= engine.maze.height) {
@@ -76,7 +76,9 @@ vec2 * Pillbox::PathFind::getPath()
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
 
-	vec2 path[stack.size()] = {};
+	//100 is temp
+	vec2 path[100] = {}; //vec2 path[stack.size()] = {};
+	
 	int i = 0;
 
 	while (!stack.empty()) {
@@ -118,7 +120,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	openList.insert(std::make_pair(0, start));
 
 	while (!openList.empty()) {
-		vec2 poppedNode = *openList.begin();
+		vec2 poppedNode = openList.begin();
 		openList.erase(openList.begin());
 
 		visitedNodes[poppedNode.x][poppedNode.y] = true;

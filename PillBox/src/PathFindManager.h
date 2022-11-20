@@ -7,10 +7,12 @@ namespace Pillbox {
 
 	class PathFind {
 		public:
-			vec2 * getPath();
+			
 			bool findPath(vec2 start);
 			void setGoal(vec2 newGoal);
-
+			PathFind(Engine& anEng) : engine(anEng) {}
+			vec2* getPath();
+			void StartUp();
 		private:
 			Engine& engine;
 			vec2 goal;
@@ -21,7 +23,7 @@ namespace Pillbox {
 			std::vector<std::vector<int>> fList;
 			std::stack<vec2> stack;
 
-			void StartUp();
+			
 			int calculateManhattan(vec2 node);
 			bool isValid(vec2 node);
 			bool isGoal(vec2 node);
