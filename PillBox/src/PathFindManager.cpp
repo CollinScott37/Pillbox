@@ -76,8 +76,7 @@ vec2 * Pillbox::PathFind::getPath()
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
 
-	//100 is temp
-	vec2 path[100] = {}; //vec2 path[stack.size()] = {};
+	vec2 path[costList[goal.x][goal.y]] = {}; //vec2 path[stack.size()] = {};
 	
 	int i = 0;
 
@@ -120,7 +119,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	openList.insert(std::make_pair(0, start));
 
 	while (!openList.empty()) {
-		vec2 poppedNode = openList.begin();
+		vec2 poppedNode = (*openList.begin()).second;
 		openList.erase(openList.begin());
 
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
@@ -133,6 +132,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//north is goal
 			if (isGoal(northNode)) {
 				parentList[northNode.x][northNode.y] = poppedNode;
+				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
 
@@ -160,6 +160,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//south is goal
 			if (isGoal(southNode)) {
 				parentList[southNode.x][southNode.y] = poppedNode;
+				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
 
@@ -187,6 +188,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//east is goal
 			if (isGoal(eastNode)) {
 				parentList[eastNode.x][eastNode.y] = poppedNode;
+				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
 
@@ -214,6 +216,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//west is goal
 			if (isGoal(westNode)) {
 				parentList[westNode.x][westNode.y] = poppedNode;
+				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
 
