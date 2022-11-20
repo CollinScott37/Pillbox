@@ -76,7 +76,7 @@ vec2 * Pillbox::PathFind::getPath()
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
 
-	vec2 path[costList[goal.x][goal.y]] = {}; //vec2 path[stack.size()] = {};
+	vec2 path[costList[goal.x][goal.y]]; //vec2 path[stack.size()] = {};
 	
 	int i = 0;
 
