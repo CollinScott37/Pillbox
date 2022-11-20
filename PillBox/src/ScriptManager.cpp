@@ -77,6 +77,24 @@ void ScriptManager::StartUp()
 			[](float f, const glm::vec3& v1) -> glm::vec3 { return f * v1; }
 		)
 		);
+
+	lua.new_usertype<glm::vec2>("vec2",
+		sol::constructors<glm::vec2(), glm::vec2(float), glm::vec2(float, float)>(),
+		"x", &glm::vec3::x,
+		"y", &glm::vec3::y,
+		// optional and fancy: operator overloading. see: https://github.com/ThePhD/sol2/issues/547
+		sol::meta_function::addition, sol::overload([](const glm::vec2& v1, const glm::vec2& v2) -> glm::vec2 { return v1 + v2; }),
+		sol::meta_function::subtraction, sol::overload([](const glm::vec2& v1, const glm::vec2& v2) -> glm::vec2 { return v1 - v2; }),
+		sol::meta_function::multiplication, sol::overload(
+			[](const glm::vec2& v1, const glm::vec2& v2) -> glm::vec2 { return v1 * v2; },
+			[](const glm::vec2& v1, float f) -> glm::vec2 { return v1 * f; },
+			[](float f, const glm::vec2& v1) -> glm::vec2 { return f * v1; }
+		)
+		);
+
+	lua.new_usertype<std::stack<glm::vec2>("stack",
+		"pop", &std::stack<glm::vec2>::pop
+		);
 	
 	lua.new_usertype<Transform>("Transform",
 		sol::constructors<Transform()>(),

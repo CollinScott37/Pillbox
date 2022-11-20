@@ -64,7 +64,7 @@ void Pillbox::PathFind::setGoal(vec2 newGoal)
 
 //use this to walk path from start to goal (returns array of indices to follow in order from start to goal) 
 //do not use if findPath returns false (available in lua)
-vec2 * Pillbox::PathFind::getPath()
+/*vec2**/stack<vec2> Pillbox::PathFind::getPath()
 {
 	stack = std::stack<vec2>();
 	vec2 currNodeParent = parentList[goal.x][goal.y];
@@ -76,7 +76,7 @@ vec2 * Pillbox::PathFind::getPath()
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
 
-	vec2 path[costList[goal.x][goal.y]]; //vec2 path[stack.size()] = {};
+	/*vec2 path[costList[goal.x][goal.y]]; //vec2 path[stack.size()] = {};
 	
 	int i = 0;
 
@@ -86,7 +86,9 @@ vec2 * Pillbox::PathFind::getPath()
 		i++;
 	}
 
-	return path;
+	return path;*/
+
+	return stack;
 }
 
 //give the start point where goose will be (available in lua)

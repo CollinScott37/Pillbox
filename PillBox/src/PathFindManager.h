@@ -7,12 +7,12 @@ namespace Pillbox {
 
 	class PathFind {
 		public:
-			
 			bool findPath(vec2 start);
 			void setGoal(vec2 newGoal);
 			PathFind(Engine& anEng) : engine(anEng) {}
-			vec2* getPath();
+			/*vec2* */ stack<vec2> getPath();
 			void StartUp();
+
 		private:
 			Engine& engine;
 			vec2 goal;
