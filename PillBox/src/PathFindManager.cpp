@@ -133,7 +133,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 			//north is goal
 			if (isGoal(northNode)) {
-				parentList[northNode.x][northNode.y] = poppedNode;
+				parentList[northNode.x][northNode.y] = vec2(poppedNode);
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -147,7 +147,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 				if (fList[northNode.x][northNode.y] == INT_MAX || fList[northNode.x][northNode.y] > newf) {
 					fList[northNode.x][northNode.y] = newf;
 					costList[northNode.x][northNode.y] = newCost;
-					parentList[northNode.x][northNode.y] = poppedNode;
+					parentList[northNode.x][northNode.y] = vec2(poppedNode);
 
 					openList.insert(std::make_pair(newf, northNode));
 				}
@@ -161,7 +161,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 			//south is goal
 			if (isGoal(southNode)) {
-				parentList[southNode.x][southNode.y] = poppedNode;
+				parentList[southNode.x][southNode.y] = vec2(poppedNode);
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -175,7 +175,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 				if (fList[southNode.x][southNode.y] == INT_MAX || fList[southNode.x][southNode.y] > newf) {
 					fList[southNode.x][southNode.y] = newf;
 					costList[southNode.x][southNode.y] = newCost;
-					parentList[southNode.x][southNode.y] = poppedNode;
+					parentList[southNode.x][southNode.y] = vec2(poppedNode);
 
 					openList.insert(std::make_pair(newf, southNode));
 				}
@@ -189,7 +189,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 			//east is goal
 			if (isGoal(eastNode)) {
-				parentList[eastNode.x][eastNode.y] = poppedNode;
+				parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -203,7 +203,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 				if (fList[eastNode.x][eastNode.y] == INT_MAX || fList[eastNode.x][eastNode.y] > newf) {
 					fList[eastNode.x][eastNode.y] = newf;
 					costList[eastNode.x][eastNode.y] = newCost;
-					parentList[eastNode.x][eastNode.y] = poppedNode;
+					parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
 
 					openList.insert(std::make_pair(newf, eastNode));
 				}
@@ -217,7 +217,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 			//west is goal
 			if (isGoal(westNode)) {
-				parentList[westNode.x][westNode.y] = poppedNode;
+				parentList[westNode.x][westNode.y] = vec2(poppedNode);
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -231,7 +231,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 				if (fList[westNode.x][westNode.y] == INT_MAX || fList[westNode.x][westNode.y] > newf) {
 					fList[westNode.x][westNode.y] = newf;
 					costList[westNode.x][westNode.y] = newCost;
-					parentList[westNode.x][westNode.y] = poppedNode;
+					parentList[westNode.x][westNode.y] = vec2(poppedNode);
 
 					openList.insert(std::make_pair(newf, westNode));
 				}
