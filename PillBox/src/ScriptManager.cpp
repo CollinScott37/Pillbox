@@ -92,10 +92,12 @@ void ScriptManager::StartUp()
 		)
 		);
 
+	/*
 	lua.new_usertype<std::stack<glm::vec2>("stack",
 		"pop", &std::stack<glm::vec2>::pop
 		);
-	
+	*/
+
 	lua.new_usertype<Transform>("Transform",
 		sol::constructors<Transform()>(),
 		"position", &Transform::position,
@@ -141,9 +143,9 @@ void ScriptManager::StartUp()
 	lua.set_function("CreateRandomValidMazeIndex", [&](const bool value) { return engine.maze.CreateRandomValidMazeIndex(value); });
 
 	//Path Find Manager
-	lua.set_function("getPath", [&]() {return engine.pathfinder.getPath();});
-	lua.set_function("findPath", [&](const vec2 start) {return engine.pathfinder.findPath(start);});
-	lua.set_function("setGoal", [&](const vec2 newGoal) {engine.pathfinder.setGoal(newGoal);});
+	//lua.set_function("getPath", [&]() {return engine.pathfinder.getPath();});
+	//lua.set_function("findPath", [&](const vec2 start) {return engine.pathfinder.findPath(start);});
+	//lua.set_function("setGoal", [&](const vec2 newGoal) {engine.pathfinder.setGoal(newGoal);});
 
 	//self
 	//lua.set_function("LoadScript", [&](const string& n, const string& p) { return engine.scripts.LoadScript(n,p); });
