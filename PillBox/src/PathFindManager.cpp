@@ -34,7 +34,7 @@ int Pillbox::PathFind::calculateManhattan(vec2 node)
 bool Pillbox::PathFind::isValid(vec2 node)
 {
 	//out of bounds node
-	if (node.x < 0 || node.y < 0 || node.x >= engine.maze.width || node.y >= engine.maze.width) {
+	if (node.x < 0 || node.y < 0 || node.x >= engine.maze.width || node.y >= engine.maze.height) {
 		return false;
 	}
 
@@ -69,14 +69,12 @@ vec2 * Pillbox::PathFind::getPath()
 	stack = std::stack<vec2>();
 	vec2 currNodeParent = parentList[goal.x][goal.y];
 
+	stack.push(goal);
+
 	while (currNodeParent.x >= 0 || currNodeParent.y >= 0) {
 		stack.push(currNodeParent);
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
-
-	//pushes the start to stack (maybe unecessary as we already at start so no need to move)
-	// V delete if useless or if it breaks anything
-	stack.push(currNodeParent);
 
 	vec2 path[stack.size()] = {};
 	int i = 0;
