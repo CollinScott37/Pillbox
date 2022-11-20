@@ -124,7 +124,7 @@ void ScriptManager::StartUp()
 
 	//Path Find Manager
 	lua.set_function("getPath", [&]() {return engine.pathfinder.getPath();});
-	lua.set_function("findPath", [&](const vec2 start) {engine.pathfinder.findPath(start);});
+	lua.set_function("findPath", [&](const vec2 start) {return engine.pathfinder.findPath(start);});
 	lua.set_function("setGoal", [&](const vec2 newGoal) {engine.pathfinder.setGoal(newGoal);});
 
 	//self
