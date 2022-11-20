@@ -1,6 +1,6 @@
 #include "PathFindManager.h"
 #include "Engine.h"
-
+//#include <bits/stdc++.h>
 using namespace Pillbox;
 
 //resets important variables
@@ -115,13 +115,17 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	}
 
 	costList[start.x][start.y] = 0;
+
 	fList[start.x][start.y] = 0;
 
+	Pair test = std::make_pair(0, start);
 	std::set<Pair> openList;
-	openList.insert(std::make_pair(0, start));
+
+	openList.insert(test);
 
 	while (!openList.empty()) {
-		vec2 poppedNode = (*openList.begin()).second;
+		auto it = *openList.begin();
+		vec2 poppedNode = it.second;
 		openList.erase(openList.begin());
 
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
