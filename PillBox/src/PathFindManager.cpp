@@ -33,16 +33,19 @@ int PathFind::calculateManhattan(vec2 node)
 //checks if a given node is outside of the maze, a wall, or valid
 bool PathFind::isValid(vec2 node)
 {
+	
 	//out of bounds node
 	if (node.x < 0 || node.y < 0 || node.x >= engine.maze.width || node.y >= engine.maze.height) {
+		//std::cout << "here1\n";
 		return false;
 	}
 
 	//node is a wall
 	if (engine.maze.maze[node.x][node.y] == 0) {
+		//std::cout << "here2\n";
 		return false;
 	}
-
+	//std::cout << "here3\n";
 	return true;
 }
 
@@ -68,10 +71,11 @@ void PathFind::setGoal(vec2 newGoal)
 {
 	stack = std::stack<vec2>();
 	vec2 currNodeParent = parentList[goal.x][goal.y];
-
+	
 	stack.push(goal);
 
 	while (currNodeParent.x >= 0 || currNodeParent.y >= 0) {
+		std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
 		stack.push(currNodeParent);
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
@@ -121,11 +125,16 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	std::map<int, vec2> openList;
 
 	openList[0] = start;
-
+	int count = 0;
 	while (!openList.empty()) {
 		vec2 poppedNode = (*openList.begin()).second;
 		openList.erase(openList.begin());
-
+		
+		std::cout << "popped: x:" <<  poppedNode.x << " y: " << poppedNode.y << "\n";
+		
+		int ffffff = fList[poppedNode.x][poppedNode.y];
+		std::cout << "ffffff: " <<  ffffff << "\n";
+		
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
 
 		vec2 northNode = vec2(poppedNode.x - 1, poppedNode.y);
@@ -136,6 +145,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//north is goal
 			if (isGoal(northNode)) {
 				parentList[northNode.x][northNode.y] = vec2(poppedNode);
+				std::cout << "pnn x:" << parentList[northNode.x][northNode.y].x << " y: " << parentList[northNode.x][northNode.y].y << "\n";
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -150,7 +160,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					fList[northNode.x][northNode.y] = newf;
 					costList[northNode.x][northNode.y] = newCost;
 					parentList[northNode.x][northNode.y] = vec2(poppedNode);
-
+					//
 					openList[newf] = northNode;
 				}
 			}
@@ -164,6 +174,9 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//south is goal
 			if (isGoal(southNode)) {
 				parentList[southNode.x][southNode.y] = vec2(poppedNode);
+				
+				std::cout << "psn x:" << parentList[southNode.x][southNode.y].x << " y: " << parentList[southNode.x][southNode.y].y << "\n";
+				
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -192,6 +205,9 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//east is goal
 			if (isGoal(eastNode)) {
 				parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
+				
+				std::cout << "pen x:" << parentList[eastNode.x][eastNode.y].x << " y: " << parentList[eastNode.x][eastNode.y].y << "\n";
+				
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -220,6 +236,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//west is goal
 			if (isGoal(westNode)) {
 				parentList[westNode.x][westNode.y] = vec2(poppedNode);
+				std::cout << "pwn x:" << parentList[westNode.x][westNode.y].x << " y: " << parentList[westNode.x][westNode.y].y << "\n";
+
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}

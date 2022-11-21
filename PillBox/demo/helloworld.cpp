@@ -97,6 +97,9 @@ int main(int argc, const char* argv[]) {
     //should the goose behave normally?
     bool stopGoose = false;
     
+    vec3 temp = e.ecs.Get<Transform>(N0).position;
+    std::cout << "NO x: " << temp.x <<  " y:" << temp.y << "\n";
+
     //movement
     bool isMoving = false;
     vec3 newMovePos = vec3(0);
@@ -130,17 +133,20 @@ int main(int argc, const char* argv[]) {
                 
                 //find the path to target
                 bool foundPath = e.pathfinder.findPath(gooseMazeIndex);
+                std::cout <<  foundPath << "wth\n";
                 if(!foundPath)
                 {
-                    std::cout << "wtf\n";
+                    std::cout <<  foundPath << "wtf\n";
                 }
             }
         }
+        std::cout << "newMovePos x: " << newMovePos.x <<  " y:" << newMovePos.y << "\n";
 
         if(!isMoving)
         {
             isMoving = true;
             pathStack = e.pathfinder.getPath();
+            //pathStack.pop();
             vec2 huh = pathStack.top();
             pathStack.pop();
             //vec3 wot = vec3(huh.x, huh.y, 0);
