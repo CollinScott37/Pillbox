@@ -1,6 +1,5 @@
 #include "PathFindManager.h"
 #include "Engine.h"
-#include <map>
 //#include <bits/stdc++.h>
 using namespace Pillbox;
 
@@ -124,7 +123,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	openList[0] = start;
 
 	while (!openList.empty()) {
-		auto poppedNode = *openList.begin();
+		vec2 poppedNode = *openList.begin().second;
 		openList.erase(openList.begin());
 
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
