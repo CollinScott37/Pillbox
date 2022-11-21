@@ -123,7 +123,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	openList[0] = start;
 
 	while (!openList.empty()) {
-		vec2 poppedNode = *openList.begin().second;
+		vec2 poppedNode = *openList.begin()->second;
 		openList.erase(openList.begin());
 
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
