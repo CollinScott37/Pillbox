@@ -79,7 +79,12 @@ void MazeManager::CreateMaze()
 	MazeToScreen();
 }
 
-vec3 MazeManager::MazeIndexToWorldPos(vec3 pos)
+vec3 MazeManager::MazeIndexToWorldPosVec3(vec3 pos)
+{
+	return MazeIndexToWorldPos(pos.x, pos.y);
+}
+
+vec3 MazeManager::MazeIndexToWorldPosVec2(vec2 pos)
 {
 	return MazeIndexToWorldPos(pos.x, pos.y);
 }
@@ -90,6 +95,14 @@ vec3 MazeManager::MazeIndexToWorldPos(int i, int j)
 	float y = (j - (height / (2))) * xyscale;
 
 	return vec3(x, -y, 0);
+}
+
+vec2 MazeManager::WorldPosToMazeIndex(vec3 pos)
+{
+	int i = (pos.x / xyscale) + (width/2);
+	int j = (pos.y / xyscale) + (height/2);
+	
+	return vec2(i,j);
 }
 
 vec3 MazeManager::CreateRandomValidMazeIndex(bool isStartIndex)
@@ -124,7 +137,6 @@ vec3 MazeManager::CreateRandomValidMazeIndex(bool isStartIndex)
 
 
 }
-
 
 void MazeManager::GenerateMazeFromPos(int x, int y)
 {

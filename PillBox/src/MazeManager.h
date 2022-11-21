@@ -20,8 +20,9 @@ namespace Pillbox
 		void ShutDown() { }
 		
 		vec3 MazeIndexToWorldPos(int x, int y);
-		vec3 MazeIndexToWorldPos(vec3 pos);
-
+		vec3 MazeIndexToWorldPosVec2(vec2 pos);
+		vec3 MazeIndexToWorldPosVec3(vec3 pos);
+		vec2 WorldPosToMazeIndex(vec3 pos);
 		vec3 CreateRandomValidMazeIndex(bool isStartIndex);
 
 	private:

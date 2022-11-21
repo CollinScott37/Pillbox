@@ -3,14 +3,12 @@
 
 namespace Pillbox {
 
-	typedef std::pair<int, vec2> Pair;
-
 	class PathFind {
 		public:
 			bool findPath(vec2 start);
 			void setGoal(vec2 newGoal);
 			PathFind(Engine& anEng) : engine(anEng) {}
-			/*vec2* */ std::stack<vec2> getPath();
+			std::stack<vec2> getPath();
 			void StartUp();
 
 		private:

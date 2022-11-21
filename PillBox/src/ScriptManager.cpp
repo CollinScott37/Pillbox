@@ -119,9 +119,9 @@ void ScriptManager::StartUp()
 	
 	//Maze Manager
 	//lua.set_function("CreateMaze", [&]() { engine.maze.CreateMaze(); });
-	lua.set_function("MazeIndexToWorldPos", [&](const int x, const int y) { return engine.maze.MazeIndexToWorldPos(x, y); });
-	lua.set_function("MazeIndexToWorldPosVec", [&](const vec3 index) { return engine.maze.MazeIndexToWorldPos(index); });
-	lua.set_function("CreateRandomValidMazeIndex", [&](const bool value) { return engine.maze.CreateRandomValidMazeIndex(value); });
+	//lua.set_function("MazeIndexToWorldPos", [&](const int x, const int y) { return engine.maze.MazeIndexToWorldPos(x, y); });
+	//lua.set_function("MazeIndexToWorldPosVec", [&](const vec3 index) { return engine.maze.MazeIndexToWorldPos(index); });
+	//lua.set_function("CreateRandomValidMazeIndex", [&](const bool value) { return engine.maze.CreateRandomValidMazeIndex(value); });
 
 	//self
 	//lua.set_function("LoadScript", [&](const string& n, const string& p) { return engine.scripts.LoadScript(n,p); });
