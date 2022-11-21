@@ -122,9 +122,12 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 	fList[start.x][start.y] = 0;
 
-	std::map<int, vec2> openList;
+	//std::map<int, vec2> openList;
+	//openList[0] = start;
 
-	openList[0] = start;
+	std::set<Pair, compare> openList;
+	openList.insert(std::make_pair(0, start));
+
 	int count = 0;
 	while (!openList.empty()) {
 		vec2 poppedNode = (*openList.begin()).second;
@@ -161,7 +164,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					costList[northNode.x][northNode.y] = newCost;
 					parentList[northNode.x][northNode.y] = vec2(poppedNode);
 					//
-					openList[newf] = northNode;
+					//openList[newf] = northNode;
+					openList.insert(std::make_pair(newf, northNode));
 				}
 			}
 		}
@@ -192,7 +196,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					costList[southNode.x][southNode.y] = newCost;
 					parentList[southNode.x][southNode.y] = vec2(poppedNode);
 
-					openList[newf] = southNode;
+					//openList[newf] = southNode;
+					openList.insert(std::make_pair(newf, northNode));
 				}
 			}
 		}
@@ -223,7 +228,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					costList[eastNode.x][eastNode.y] = newCost;
 					parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
 
-					openList[newf] = eastNode;
+					//openList[newf] = eastNode;
+					openList.insert(std::make_pair(newf, northNode));
 				}
 			}
 		}
@@ -253,7 +259,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					costList[westNode.x][westNode.y] = newCost;
 					parentList[westNode.x][westNode.y] = vec2(poppedNode);
 
-					openList[newf] = westNode;
+					//openList[newf] = westNode;
+					openList.insert(std::make_pair(newf, northNode));
 				}
 			}
 		}
