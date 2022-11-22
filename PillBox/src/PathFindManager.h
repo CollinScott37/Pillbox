@@ -1,9 +1,10 @@
 #pragma once
 #include "Types.h"
+#include "Pair.h"
 
 namespace Pillbox {
 
-	typedef std::pair<int, vec2> Pair;
+	//typedef std::pair<int, vec2> Pair;
 
 	class PathFind {
 		public:
@@ -23,14 +24,14 @@ namespace Pillbox {
 			std::vector<std::vector<int>> fList;
 			std::stack<vec2> stack;
 
-			struct compare {
+			/*struct compare {
 				bool operator()(const Pair& a, const Pair& b) {
 					if (a.first < b.first) {
 						return true;
 					}
 					return false;
 				}
-			};
+			};*/
 			
 			int calculateManhattan(vec2 node);
 			bool isValid(vec2 node);
