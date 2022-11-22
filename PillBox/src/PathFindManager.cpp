@@ -125,7 +125,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	//std::map<int, vec2> openList;
 	//openList[0] = start;
 
-	std::set<Pair, compare> openList;
+	std::set<Pair> openList;
 	openList.insert(std::make_pair(0, start));
 
 	int count = 0;
