@@ -125,12 +125,16 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	//std::map<int, vec2> openList;
 	//openList[0] = start;
 
-	std::set<Pair> openList;
-	openList.insert(std::make_pair(0, start));
+	//std::set<Pair> openList;
+	//openList.insert(std::make_pair(0, start));
+
+	std::set<std::tuple<int>> openList;
+	openList.insert(std::make_tuple(0, start.x, start.y));
 
 	int count = 0;
 	while (!openList.empty()) {
-		vec2 poppedNode = (*openList.begin()).second;
+		auto &tup = (*openList.begin());
+		vec2 poppedNode = vec2(std::get<1>(tup), std::get<2>(tup));
 		openList.erase(openList.begin());
 		
 		std::cout << "popped: x:" <<  poppedNode.x << " y: " << poppedNode.y << "\n";
@@ -165,7 +169,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					parentList[northNode.x][northNode.y] = vec2(poppedNode);
 					//
 					//openList[newf] = northNode;
-					openList.insert(std::make_pair(newf, northNode));
+					openList.insert(std::make_tuple(newf, northNode.x, northNode.y));
 				}
 			}
 		}
@@ -197,7 +201,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					parentList[southNode.x][southNode.y] = vec2(poppedNode);
 
 					//openList[newf] = southNode;
-					openList.insert(std::make_pair(newf, northNode));
+					//openList.insert(std::make_pair(newf, southNode));
+					openList.insert(std::make_tuple(newf, southNode.x, southNode.y));
 				}
 			}
 		}
@@ -229,7 +234,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
 
 					//openList[newf] = eastNode;
-					openList.insert(std::make_pair(newf, northNode));
+					//openList.insert(std::make_pair(newf, eastNode));
+					openList.insert(std::make_tuple(newf, eastNode.x, eastNode.y));
 				}
 			}
 		}
@@ -260,7 +266,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					parentList[westNode.x][westNode.y] = vec2(poppedNode);
 
 					//openList[newf] = westNode;
-					openList.insert(std::make_pair(newf, northNode));
+					//openList.insert(std::make_pair(newf, westNode));
+					openList.insert(std::make_tuple(newf, westNode.x, westNode.y));
 				}
 			}
 		}
