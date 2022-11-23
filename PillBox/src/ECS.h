@@ -1,6 +1,7 @@
 #pragma once
 #include "Types.h"
 #include "SparseSetHolder.h"
+#include <memory>
 namespace Pillbox
 {
 	typedef int ComponentIndex;
