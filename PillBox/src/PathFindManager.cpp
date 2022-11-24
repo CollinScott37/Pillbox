@@ -75,7 +75,7 @@ void PathFind::setGoal(vec2 newGoal)
 	stack.push(goal);
 
 	while (currNodeParent.x >= 0 || currNodeParent.y >= 0) {
-		std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
+		//std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
 		stack.push(currNodeParent);
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
@@ -137,10 +137,10 @@ bool Pillbox::PathFind::findPath(vec2 start)
 		vec2 poppedNode = vec2(std::get<1>(tup), std::get<2>(tup));
 		openList.erase(openList.begin());
 		
-		std::cout << "popped: x:" <<  poppedNode.x << " y: " << poppedNode.y << "\n";
+		//std::cout << "popped: x:" <<  poppedNode.x << " y: " << poppedNode.y << "\n";
 		
 		int ffffff = fList[poppedNode.x][poppedNode.y];
-		std::cout << "ffffff: " <<  ffffff << "\n";
+		//std::cout << "ffffff: " <<  ffffff << "\n";
 		
 		visitedNodes[poppedNode.x][poppedNode.y] = true;
 

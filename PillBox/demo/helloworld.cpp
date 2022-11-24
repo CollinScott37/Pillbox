@@ -79,7 +79,11 @@ int main(int argc, const char* argv[]) {
 
     //Sounds
     e.sounds.LoadSound("quack.wav", "sounds");
-
+    std::cout << "N0 ID:" << N0 << "\n";
+    
+    
+    //GOOSE MOVEMENT START
+    
     bool hasTarget = false;
     auto GetNewTarget = [&]()
     {
@@ -88,6 +92,7 @@ int main(int argc, const char* argv[]) {
             auto posTarget = e.ecs.Get<MazeObject>(i);
             if(!posTarget.isFound)
             {
+                std::cout << "posTarget ID:" << i << "\n";
                 return i;
             }
         }
@@ -97,7 +102,7 @@ int main(int argc, const char* argv[]) {
     //should the goose behave normally?
     bool stopGoose = false;
     
-    vec3 temp = e.ecs.Get<Transform>(N0).position;
+    vec3 temp = e.ecs.Get<MazeObject>(N0).mazeIndex;
     std::cout << "NO x: " << temp.x <<  " y:" << temp.y << "\n";
 
     //movement
@@ -108,6 +113,10 @@ int main(int argc, const char* argv[]) {
     vec3 movOffsetAmount = vec3(0);
     auto pathStack = std::stack<vec2>();;
 
+    std::cout << "Goose Position WORLD x: " << e.ecs.Get<Transform>(goose).position.x <<  " y:" << e.ecs.Get<Transform>(goose).position.y << "\n";
+    
+    auto goosetempmi = e.maze.WorldPosToMazeIndex(e.ecs.Get<Transform>(goose).position);
+    std::cout << "Goose Position MAZE x: " << goosetempmi.x <<  " y:" << goosetempmi.y << "\n";
     auto GooseBehavior = [&]()
     {
         if(stopGoose) { return; }
@@ -124,7 +133,12 @@ int main(int argc, const char* argv[]) {
             {
                 //set target
                 hasTarget = true;
+
                 MazeObject mo = e.ecs.Get<MazeObject>(id);
+                //vec3 heckel = e.ecs.Get<Transform>(id).position;
+                std::cout << "mo x: " << mo.mazeIndex.x <<  " y:" << mo.mazeIndex.y << "\n";
+                //std::cout << "heckel x: " << heckel.x <<  " y:" << heckel.y << "\n";
+                
                 e.pathfinder.setGoal(vec2(mo.mazeIndex));
 
                 //get goose index pos;
@@ -140,14 +154,15 @@ int main(int argc, const char* argv[]) {
                 }
             }
         }
-        std::cout << "newMovePos x: " << newMovePos.x <<  " y:" << newMovePos.y << "\n";
-
+        std::cout << "newMovePos WORLD x: " << newMovePos.x <<  " y:" << newMovePos.y << "\n";
+        
         if(!isMoving)
         {
             isMoving = true;
             pathStack = e.pathfinder.getPath();
             //pathStack.pop();
             vec2 huh = pathStack.top();
+            std::cout << "newMovePos MAZE x:" << huh.x <<  " y:" << huh.y << "\n";
             pathStack.pop();
             //vec3 wot = vec3(huh.x, huh.y, 0);
             newMovePos = e.maze.MazeIndexToWorldPosVec2(huh);
@@ -172,7 +187,6 @@ int main(int argc, const char* argv[]) {
                  e.ecs.Get<Transform>(goose).position = newMovePos;
                  isMoving = false;
                  alreadyCalcDistance = false;
-                 hasTarget = false;
             }
             else
             {
