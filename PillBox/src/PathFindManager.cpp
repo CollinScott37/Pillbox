@@ -128,8 +128,8 @@ bool Pillbox::PathFind::findPath(vec2 start)
 	//std::set<Pair> openList;
 	//openList.insert(std::make_pair(0, start));
 
-	std::set<std::tuple<int>> openList;
-	openList.insert(std::make_tuple(0, start.x, start.y));
+	std::set<std::tuple<int, int, int>> openList;
+	openList.insert(std::make_tuple(0, (int)start.x, (int)start.y));
 
 	int count = 0;
 	while (!openList.empty()) {
@@ -169,7 +169,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 					parentList[northNode.x][northNode.y] = vec2(poppedNode);
 					//
 					//openList[newf] = northNode;
-					openList.insert(std::make_tuple(newf, northNode.x, northNode.y));
+					openList.insert(std::make_tuple(newf, (int)northNode.x, (int)northNode.y));
 				}
 			}
 		}
@@ -202,7 +202,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 					//openList[newf] = southNode;
 					//openList.insert(std::make_pair(newf, southNode));
-					openList.insert(std::make_tuple(newf, southNode.x, southNode.y));
+					openList.insert(std::make_tuple(newf, (int)southNode.x, (int)southNode.y));
 				}
 			}
 		}
@@ -235,7 +235,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 					//openList[newf] = eastNode;
 					//openList.insert(std::make_pair(newf, eastNode));
-					openList.insert(std::make_tuple(newf, eastNode.x, eastNode.y));
+					openList.insert(std::make_tuple(newf, (int)eastNode.x, (int)eastNode.y));
 				}
 			}
 		}
@@ -267,7 +267,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 
 					//openList[newf] = westNode;
 					//openList.insert(std::make_pair(newf, westNode));
-					openList.insert(std::make_tuple(newf, westNode.x, westNode.y));
+					openList.insert(std::make_tuple(newf, (int)westNode.x, (int)westNode.y));
 				}
 			}
 		}
