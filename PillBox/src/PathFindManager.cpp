@@ -75,7 +75,7 @@ void PathFind::setGoal(vec2 newGoal)
 	stack.push(goal);
 
 	while (currNodeParent.x >= 0 || currNodeParent.y >= 0) {
-		std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
+		//std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
 		stack.push(currNodeParent);
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
@@ -152,7 +152,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//north is goal
 			if (isGoal(northNode)) {
 				parentList[northNode.x][northNode.y] = vec2(poppedNode);
-				std::cout << "pnn x:" << parentList[northNode.x][northNode.y].x << " y: " << parentList[northNode.x][northNode.y].y << "\n";
+				//std::cout << "pnn x:" << parentList[northNode.x][northNode.y].x << " y: " << parentList[northNode.x][northNode.y].y << "\n";
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
 			}
@@ -183,7 +183,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			if (isGoal(southNode)) {
 				parentList[southNode.x][southNode.y] = vec2(poppedNode);
 				
-				std::cout << "psn x:" << parentList[southNode.x][southNode.y].x << " y: " << parentList[southNode.x][southNode.y].y << "\n";
+				//std::cout << "psn x:" << parentList[southNode.x][southNode.y].x << " y: " << parentList[southNode.x][southNode.y].y << "\n";
 				
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
@@ -216,7 +216,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			if (isGoal(eastNode)) {
 				parentList[eastNode.x][eastNode.y] = vec2(poppedNode);
 				
-				std::cout << "pen x:" << parentList[eastNode.x][eastNode.y].x << " y: " << parentList[eastNode.x][eastNode.y].y << "\n";
+				//std::cout << "pen x:" << parentList[eastNode.x][eastNode.y].x << " y: " << parentList[eastNode.x][eastNode.y].y << "\n";
 				
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
@@ -248,7 +248,7 @@ bool Pillbox::PathFind::findPath(vec2 start)
 			//west is goal
 			if (isGoal(westNode)) {
 				parentList[westNode.x][westNode.y] = vec2(poppedNode);
-				std::cout << "pwn x:" << parentList[westNode.x][westNode.y].x << " y: " << parentList[westNode.x][westNode.y].y << "\n";
+				//std::cout << "pwn x:" << parentList[westNode.x][westNode.y].x << " y: " << parentList[westNode.x][westNode.y].y << "\n";
 
 				costList[goal.x][goal.y] = costList[poppedNode.x][poppedNode.y] + 1;
 				return true;
