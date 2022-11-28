@@ -84,6 +84,7 @@ int main(int argc, const char* argv[]) {
     //Sounds
     e.sounds.LoadSound("quack.wav", "sounds");
     e.sounds.LoadSound("moyai.wav", "sounds");
+    e.sounds.LoadSound("fish.wav", "sounds");
     //std::::cout << "N0 ID:" << N0 << "\n";
     
     int nothingCount = 0;
@@ -186,7 +187,7 @@ int main(int argc, const char* argv[]) {
         isResetting = true;
         hasTarget = false;
         std::cout << "quack\n";
-        e.sounds.PlaySound("quack.wav");
+        e.sounds.PlaySound("quack.wav", 1);
         
         e.maze.CreateMaze();
         
@@ -339,7 +340,7 @@ int main(int argc, const char* argv[]) {
                     nothingCount += 1;
                     string name = (string)"nothing" + std::to_string(nothingCount) + (string)".png";
                     ChangeOverlay(name);
-                    e.sounds.PlaySound("moyai.wav");
+                    e.sounds.PlaySound("moyai.wav", 1);
                     //std::::cout << (e.ecs.Get<MazeObject>(id).isFound == e.ecs.Get<MazeObject>(N0).isFound) << "\n";
                 }
             }
@@ -358,6 +359,7 @@ int main(int argc, const char* argv[]) {
 
     ChangeOverlay("nothing1.png");
 
+    //e.sounds.PlaySound("fish.wav", 0.05);
     e.RunGameLoop([&]() {
         
         e.graphics.Draw();

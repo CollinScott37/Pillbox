@@ -13,11 +13,12 @@ void SoundManager::StartUp()
 	//death.load(engine.resources.getPath("sounds/death.wav").c_str());
 }
 
-void SoundManager::PlaySound(string name)
+void SoundManager::PlaySound(string name, float vol)
 {
 	if (sounds.count(name) != 0)
 	{
-		soloud.play(sounds[name]);
+		auto handle = soloud.play(sounds[name]);
+		soloud.setVolume(handle, vol);
 	}
 	
 	

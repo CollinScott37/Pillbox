@@ -14,7 +14,7 @@ namespace Pillbox
 		SoundManager(Engine& anEng) : engine(anEng) {}
 		void StartUp();
 		void ShutDown();
-		void PlaySound(string);
+		void PlaySound(string, float);
 		bool LoadSound( const string& name, const string& path );
 	private:
 		

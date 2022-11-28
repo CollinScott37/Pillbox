@@ -51,7 +51,7 @@ void ScriptManager::StartUp()
 
 	//Sound
 	lua.set_function("LoadSound", [&](const string& name, const string& path) { return engine.sounds.LoadSound(name, path); } );
-	lua.set_function("PlaySound", [&](const string& name) { return engine.sounds.PlaySound(name); } );
+	//lua.set_function("PlaySound", [&](const string& name) { return engine.sounds.PlaySound(name); } );
 
 	//Grahics
 	lua.set_function("LoadImageFile", [&](const string& name, const string& path) { return engine.graphics.LoadImageFile(name, path); });
