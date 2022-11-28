@@ -271,12 +271,12 @@ void MazeManager::MazeToScreen()
 			if (maze[i][j] == visited)
 			{
 				engine.ecs.Get<Sprite>(id).name = "visited.png";
-				engine.ecs.Get<Sprite>(id).z = 0.5f;
+				engine.ecs.Get<Sprite>(id).z = 0.9f;
 			}
 			else if (maze[i][j] == wall)
 			{
 				engine.ecs.Get<Sprite>(id).name = "wall.png";
-				engine.ecs.Get<Sprite>(id).z = 0.2f;
+				engine.ecs.Get<Sprite>(id).z = 0.9f;
 			}
 
 		}

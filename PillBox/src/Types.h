@@ -50,7 +50,7 @@ namespace Pillbox
     typedef glm::mat4 mat4;
 
     
-    struct Transform { vec3 position; vec3 rotation; vec3 scale; };
+    struct Transform { vec3 position; vec3 rotation; vec3 scale; vec3 axis = vec3(0,0,1); };
     struct Sprite { std::string name; double z; };
     struct Trigger { vec3 tl; vec3 br; };
     struct Target { Transform target; };

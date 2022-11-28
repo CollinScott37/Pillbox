@@ -180,14 +180,16 @@ void GraphicsManager::Draw()
         {
             Sprite s = engine.ecs.Get<Sprite>(e);
             Transform t = engine.ecs.Get<Transform>(e);
+            
+            float angle = t.rotation.x;
 
             int image_width = imageMap[s.name].width;
             int image_height = imageMap[s.name].width;
             glm::vec2 position = t.position;
             real z = s.z; //placeholder
             glm::vec3 scale = t.scale; //placeholder
-            
-            uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * glm::scale(mat4{ 1 }, vec3(scale.x, scale.y, scale.z));//scale ) ); 
+            //* rotate(mat4{ 1.0 }, glm::radians(s.rotateAngle), s.rotateAxis)
+            uniforms.transform = translate(mat4{ 1 }, vec3(position, z)) * rotate(mat4{ 1.0 }, glm::radians(angle), t.axis)  * glm::scale(mat4{ 1 }, vec3(scale.x, scale.y, scale.z));//scale ) ); 
 
             if (image_width < image_height) {
                 uniforms.transform = uniforms.transform * glm::scale(mat4{ 1 }, vec3(real(image_width) / image_height, 1.0, 1.0));
