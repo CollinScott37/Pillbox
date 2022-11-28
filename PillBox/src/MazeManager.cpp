@@ -35,8 +35,8 @@ void MazeManager::CreateMaze()
 	}
 
 
-	//srand(time(NULL));
-	rand();
+	srand(time(NULL));
+	//rand();
 
 	bool normalBlock = false;
 	for (int j = 0; j < height; j += 1)

@@ -91,16 +91,24 @@ int main(int argc, const char* argv[]) {
     bool alreadyCalcDistance = false; //has it calculated a distane to go to
     auto GetNewTarget = [&]()
     {
+        auto min = 100000000.0f;
+        auto posTarget = -1;
         for(int i = N0; i <= QM; i += 1)
         {
+            
             auto mo = e.ecs.Get<MazeObject>(i);
             if(!mo.isFound)
             {
-                //std::::cout << "posTarget ID:" << i << "\n";
-                return i;
+                auto pos = e.ecs.Get<Transform>(i).position;
+                float dist = glm::distance(pos,  e.ecs.Get<Transform>(goose).position);
+                if(dist <= min)
+                {
+                    posTarget = i;
+                    min = dist;
+                }
             }
         }
-        return -1; //return found all
+        return posTarget; //return found all
     };
 
 
@@ -121,10 +129,41 @@ int main(int argc, const char* argv[]) {
     auto goosetempmi = e.maze.WorldPosToMazeIndex(e.ecs.Get<Transform>(goose).position);
     //std::::cout << "Goose Position MAZE x: " << goosetempmi.x <<  " y:" << goosetempmi.y << "\n";
     //std::::cout << "AFTER LOOP\n";
+    bool isResetting = false;
+
+    auto ResetEverything = [&]()
+    {
+        isResetting = true;
+        hasTarget = false;
+        std::cout << "quack\n";
+        e.sounds.PlaySound("quack.wav");
+        
+        e.maze.CreateMaze();
+        
+        InitMazeObject(N0, "n.png");
+        InitMazeObject(O, "o.png");
+        InitMazeObject(C, "c.png");
+        InitMazeObject(A, "a.png");
+        InitMazeObject(N1, "n.png");
+        InitMazeObject(E, "e.png");
+        InitMazeObject(QM, "qm.png");
+
+        vec3 gooseIndex = e.maze.CreateRandomValidMazeIndex(false);
+        e.ecs.Get<Transform>(goose).position = e.maze.MazeIndexToWorldPosVec3(gooseIndex);
+        isMoving = false;
+        isResetting = false;
+    };
 
     auto GooseBehavior = [&]()
     {
-        if(stopGoose) { return; }
+        if(isResetting) {return;}
+
+        if(stopGoose)
+        {
+            ResetEverything();
+            stopGoose = false;
+            return;
+        }
 
         if(!hasTarget)
         {
@@ -189,9 +228,9 @@ int main(int argc, const char* argv[]) {
             if(!alreadyCalcDistance)
             {
                 vec3 diff = newMovePos - e.ecs.Get<Transform>(goose).position;
-                movOffsetAmount.x = diff.x/1;
-                movOffsetAmount.y = diff.y/1;
-                movOffsetAmount.z = diff.z/1;
+                movOffsetAmount.x = diff.x;
+                movOffsetAmount.y = diff.y;
+                movOffsetAmount.z = diff.z;
                 alreadyCalcDistance = true;
             }
 
@@ -234,14 +273,15 @@ int main(int argc, const char* argv[]) {
         });
     };
 
+
+
     e.RunGameLoop([&]() {
         
         e.graphics.Draw();
         
         if (e.input.GetKeyCodeUp(GLFW_KEY_Q))
         {
-            std::cout << "quack\n";
-            e.sounds.PlaySound("quack.wav");
+            ResetEverything();
         }
         
         GooseBehavior();
