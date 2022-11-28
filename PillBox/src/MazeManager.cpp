@@ -100,7 +100,7 @@ vec3 MazeManager::MazeIndexToWorldPos(int i, int j)
 vec2 MazeManager::WorldPosToMazeIndex(vec3 pos)
 {
 	int i = (pos.x / xyscale) + (width/2);
-	int j = (pos.y / xyscale) + (height/2);
+	int j = (-pos.y / xyscale) + (height/2);
 	
 	return vec2(i,j);
 }

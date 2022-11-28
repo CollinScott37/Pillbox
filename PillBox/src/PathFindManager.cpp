@@ -75,7 +75,7 @@ void PathFind::setGoal(vec2 newGoal)
 	stack.push(goal);
 
 	while (currNodeParent.x >= 0 || currNodeParent.y >= 0) {
-		//std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
+		std::cout << "stack: x:" << stack.top().x << " y:" << stack.top().y << "\n";  
 		stack.push(currNodeParent);
 		currNodeParent = parentList[currNodeParent.x][currNodeParent.y];
 	}
